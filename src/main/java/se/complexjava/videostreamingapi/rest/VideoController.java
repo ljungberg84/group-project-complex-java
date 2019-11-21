@@ -1,4 +1,4 @@
-package se.complexjava.videostreamingapi;
+package se.complexjava.videostreamingapi.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,29 +14,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static com.google.common.primitives.Longs.min;
-
 
 @RestController
 public class VideoController {
 
-    private static Logger logger = LoggerFactory.getLogger(VideoController.class);
 
     @GetMapping("/videos/{name}")
     public ResponseEntity<ResourceRegion> getVideo(@PathVariable(name = "name") String name, @RequestHeader HttpHeaders headers) throws Exception{
 
-        logger.info("GetVideo called");
-
         Path file = Paths.get("./videos/" + name);
-
-        logger.info("Video: {}", file.toUri());
-
         UrlResource video = new UrlResource(file.toUri());
 
         ResourceRegion newResource = resourceRegion(video, headers);
-
-        logger.info("Creating response");
-
 
         return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT)
                 .contentType(MediaTypeFactory
@@ -55,12 +44,14 @@ public class VideoController {
 
             long start = range.get(0).getRangeStart(contentLength);//make this less hardcoded
             long end = range.get(0).getRangeEnd(contentLength);//    -//-
-            long rangeLength = min(1 * 1024 * 1024, end - start + 1);
+            long rangeLength = Long.min(1 * 1024 * 1024, end - start + 1);//set rangeLength to max 1 mb
+
             return new ResourceRegion(video, start, rangeLength);
 
         }else{
 
-            long rangeLength = min(1 * 1024 * 1024, contentLength);
+            long rangeLength = Long.min(1 * 1024 * 1024, contentLength);
+
             return new ResourceRegion(video, 0, rangeLength);
         }
     }
