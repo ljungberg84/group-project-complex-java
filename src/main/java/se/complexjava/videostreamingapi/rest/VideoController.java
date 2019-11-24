@@ -1,7 +1,6 @@
 package se.complexjava.videostreamingapi.rest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.ResourceRegion;
 import org.springframework.http.*;
@@ -44,7 +43,7 @@ public class VideoController {
 
             long start = range.get(0).getRangeStart(contentLength);//make this less hardcoded
             long end = range.get(0).getRangeEnd(contentLength);//    -//-
-            long rangeLength = Long.min(1 * 1024 * 1024, end - start + 1);//set rangeLength to max 1 mb
+            long rangeLength = Long.min(1 * 1024 * 1024, end - start + 1);//sets rangeLength to max 1 mb
 
             return new ResourceRegion(video, start, rangeLength);
 
