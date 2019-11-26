@@ -18,6 +18,8 @@ import java.time.Instant;
 @AllArgsConstructor
 public class UserModel {
 
+    private Long id;
+
     private String name;
 
     private String lastName;

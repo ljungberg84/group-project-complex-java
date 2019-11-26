@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserService {
 
     UserModel createUser(UserEntity user);
-    UserModel getUser(String userId);
+    UserModel getUser(Long userId) throws Exception;
     List<UserModel> getUsers();
     void deleteUser(String userId);
     UserModel updateUser(UserEntity user);

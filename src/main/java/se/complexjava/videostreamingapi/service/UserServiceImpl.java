@@ -4,11 +4,13 @@ package se.complexjava.videostreamingapi.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.UserEntity;
+import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.repository.UserRepository;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,8 +33,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserModel getUser(String userId) {
-        return null;
+    public UserModel getUser(Long userId) throws Exception{
+
+        Optional<UserEntity> user = repository.findById(userId);
+
+        if(!user.isPresent()){
+            throw new ResourceNotFoundException(String.format("User with id: %s not found", userId));
+        }
+
+        return UserModel.fromEntity(user.get());
     }
 
     @Override
