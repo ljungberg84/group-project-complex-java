@@ -12,10 +12,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.nio.file.Path;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
 @Getter
@@ -46,19 +44,18 @@ public class UserEntity implements Serializable {
 
     private String avatarImagePath;
 
-    //set on backend?
     private Instant joinDate;
 
     //placeholder for VideoEntity
     //OneToMany, mapped by uploadedByUser
-    private Set<String> uploadedVideos = new HashSet<>();
+    //private Set<String> uploadedVideos = new HashSet<>();
     //placeholder for VideoEntity
     //ManyToMany, mapped by userHistory
-    private Set<String>videoHistory = new HashSet<>();
+    //private Set<String>videoHistory = new HashSet<>();
     //placeholder for CommentEntity
     //OneToMany, mapped by byUser
-    private Set<String> comments = new HashSet<>();
+    //private Set<String> comments = new HashSet<>();
     //placeholder for  LikeEntity
     //OneToMany, mapped by byUser
-    private Set<String> likes = new HashSet<>();
+    //private Set<String> likes = new HashSet<>();
 }

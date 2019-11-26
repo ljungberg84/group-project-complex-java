@@ -1,9 +1,11 @@
 package se.complexjava.videostreamingapi.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.UserEntity;
 import se.complexjava.videostreamingapi.model.UserModel;
+import se.complexjava.videostreamingapi.repository.UserRepository;
 
 import java.time.Instant;
 import java.util.List;
@@ -11,11 +13,21 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+
+    private UserRepository repository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
     public UserModel createUser(UserEntity user) {
 
         user.setJoinDate(Instant.now());
-        return null;
+        UserEntity savedUser = repository.save(user);
+
+        return UserModel.fromEntity(savedUser);
     }
 
     @Override
