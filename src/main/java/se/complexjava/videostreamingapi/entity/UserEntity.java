@@ -1,14 +1,8 @@
 package se.complexjava.videostreamingapi.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
@@ -18,6 +12,7 @@ import java.time.Instant;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity implements Serializable {
@@ -34,6 +29,7 @@ public class UserEntity implements Serializable {
     private String lastName;
 
     @Email
+    @Column( unique = true )
     private String email;
 
     @NotEmpty(message = "personal id can't be null or empty")

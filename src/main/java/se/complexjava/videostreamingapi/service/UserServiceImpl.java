@@ -8,7 +8,9 @@ import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotF
 import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.repository.UserRepository;
 
+
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,19 +20,20 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository repository;
 
-    @Autowired
     public UserServiceImpl(UserRepository repository) {
         this.repository = repository;
     }
 
+
     @Override
-    public UserModel createUser(UserEntity user) {
+    public UserModel createUser(UserEntity user) throws Exception{
 
-        user.setJoinDate(Instant.now());
-        UserEntity savedUser = repository.save(user);
+            user.setJoinDate(Instant.now());
+            UserEntity savedUser = repository.save(user);
 
-        return UserModel.fromEntity(savedUser);
+            return UserModel.fromEntity(savedUser);
     }
+
 
     @Override
     public UserModel getUser(Long userId) throws Exception{
@@ -44,18 +47,45 @@ public class UserServiceImpl implements UserService {
         return UserModel.fromEntity(user.get());
     }
 
+
     @Override
     public List<UserModel> getUsers() {
-        return null;
+
+        Iterable<UserEntity> users = repository.findAll();
+        List<UserModel> userModels = new ArrayList<>();
+
+        users.forEach(user -> userModels.add(UserModel.fromEntity(user)));
+
+        return userModels;
     }
 
-    @Override
-    public void deleteUser(String userId) {
 
+    @Override
+    public void deleteUser(Long userId) {
+
+         repository.deleteById(userId);
     }
 
+
     @Override
-    public UserModel updateUser(UserEntity user) {
-        return null;
+    public UserModel updateUser(UserEntity user) throws Exception{
+
+        Optional<UserEntity> u = repository.findById(user.getId());
+
+        if(!u.isPresent()){
+            throw new ResourceNotFoundException(String.format("Cant update user: User with id: %s not found", user.getId()));
+        }
+
+        UserEntity  userToUpdate= u.get();
+
+        userToUpdate.setName(user.getName());
+        userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setPassword(user.getPassword());
+        userToUpdate.setAvatarImagePath(user.getAvatarImagePath());
+
+        UserEntity savedUser = repository.save(userToUpdate);
+
+        return UserModel.fromEntity(savedUser);
     }
 }
