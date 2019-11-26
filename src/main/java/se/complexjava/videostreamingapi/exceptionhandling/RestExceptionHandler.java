@@ -14,11 +14,11 @@ import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotF
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
+    //TODO: make a response error serializable class to return in responseBody
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity handleResourceNotFound(ResourceNotFoundException e){
 
-        //TODO: make a response error serializable class to return in responseBody
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
     }
 
