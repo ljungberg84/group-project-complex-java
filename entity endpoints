@@ -5,7 +5,8 @@ Adding entities:
   POST: /users/{ id }/videos
   GET: /user/{ id }/videos
     
-  POST: /category
+  POST: /categories
+  Get: /categories
 
   Post: /videos/{ id }/category (ska kunna hantera listor)
   
@@ -13,6 +14,7 @@ Adding entities:
   
   GET: /videos/{ id }/comments
   GET: /video/{ id }/likes
+  ejhkjhdjfhj
   
   POST: /videos/{ id }/users/{ id }/likes
   
