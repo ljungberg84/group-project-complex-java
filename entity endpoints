@@ -1,0 +1,14 @@
+Adding entities:
+  
+  POST: /users
+  
+  POST: /category
+  
+  POST: /videos/{ userId }
+  
+  POST: /comments/{ userId }/{ videoId }
+  
+  POST: /like-video/{ userId }/{ videoId }
+  
+  POST: /like-comment/{ userId }/{ commentId }
+  
