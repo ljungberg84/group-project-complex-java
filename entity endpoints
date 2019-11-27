@@ -2,6 +2,12 @@ Adding entities:
   
   POST: /users
   
+  POST: /users/{ id }/video
+  
+  Post: /videos
+  
+  Post: /videos/{ id }/category
+  
   POST: /category
   
   POST: /videos/{ userId }
