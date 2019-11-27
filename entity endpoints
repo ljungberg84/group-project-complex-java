@@ -6,7 +6,7 @@ Adding entities:
     
   POST: /category
 
-  Post: /videos/{ id }/category/{ id }
+  Post: /videos/{ id }/category
   
   POST: /videos/{ id }/users/{ id }/comment
   
