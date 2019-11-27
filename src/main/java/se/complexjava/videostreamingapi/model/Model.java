@@ -7,11 +7,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public abstract class Model {
 
-
     private static ModelMapper modelMapper = new ModelMapper();
-
 
     public static <T extends Model, E extends BaseEntity> T fromEntity (E entity, Type target){
 

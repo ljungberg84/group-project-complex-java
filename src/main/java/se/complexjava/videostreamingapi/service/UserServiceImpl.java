@@ -8,7 +8,6 @@ import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotF
 import se.complexjava.videostreamingapi.repository.UserRepository;
 
 
-import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.Optional;
 
