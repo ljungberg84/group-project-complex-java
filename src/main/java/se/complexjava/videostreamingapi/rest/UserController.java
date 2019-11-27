@@ -4,7 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.complexjava.videostreamingapi.entity.UserEntity;
+import se.complexjava.videostreamingapi.entity.VideoEntity;
 import se.complexjava.videostreamingapi.model.UserModel;
+import se.complexjava.videostreamingapi.model.VideoModel;
 import se.complexjava.videostreamingapi.service.UserService;
 
 import javax.validation.Valid;
@@ -66,16 +68,16 @@ public class UserController {
     }
 
 
-//    @PostMapping("/{userId}/videos")
-//    public ResponseEntity<VideoModel> addVideo ( @PathVariable long userId, @Valid @RequestBody VideoEntiy video ) throws Exception{
-//
-//        return null;
-//    }
-//
-//
-//    @GetMapping("/{userId}/videos")
-//    public ResponseEntity<VideoModel> getVideos ( @PathVariable long userId, @Valid @RequestBody VideoEntiy video ) throws Exception{
-//
-//        return null;
-//    }
+    @PostMapping("/{userId}/videos")
+    public ResponseEntity<VideoModel> addVideo (@PathVariable long userId, @Valid @RequestBody VideoEntity video ) throws Exception{
+
+        return null;
+    }
+
+
+    @GetMapping("/{userId}/videos")
+    public ResponseEntity<VideoModel> getVideos ( @PathVariable long userId, @Valid @RequestBody VideoEntity video ) throws Exception{
+
+        return null;
+    }
 }
