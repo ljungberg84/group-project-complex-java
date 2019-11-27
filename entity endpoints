@@ -3,10 +3,8 @@ Adding entities:
   POST: /users
   
   POST: /users/{ id }/video
-  
-  Post: /videos
-  
-  Post: /videos/{ id }/category
+    
+  Post: /videos/{ id }/category/{ id }
   
   POST: /category
   
