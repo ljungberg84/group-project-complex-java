@@ -4,13 +4,12 @@ package se.complexjava.videostreamingapi.service;
 import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.UserEntity;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
-import se.complexjava.videostreamingapi.model.Model;
-import se.complexjava.videostreamingapi.model.UserModel;
+
 import se.complexjava.videostreamingapi.repository.UserRepository;
 
 
+import javax.transaction.Transactional;
 import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,17 +25,16 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserModel createUser(UserEntity user) throws Exception{
+    public UserEntity createUser(UserEntity user) throws Exception{
 
             user.setJoinDate(Instant.now());
-            UserEntity savedUser = repository.save(user);
 
-            return Model.fromEntity(savedUser, UserModel.class);
+            return repository.save(user);
     }
 
 
     @Override
-    public UserModel getUser(Long userId) throws Exception{
+    public UserEntity getUser(Long userId) throws Exception{
 
         Optional<UserEntity> user = repository.findById(userId);
 
@@ -44,16 +42,15 @@ public class UserServiceImpl implements UserService {
             throw new ResourceNotFoundException(String.format("User with id: %s not found", userId));
         }
 
-        return Model.fromEntity(user.get(), UserModel.class);
+        return user.get();
     }
 
 
     @Override
-    public List<UserModel> getUsers() {
+    public Iterable<UserEntity> getUsers() {
 
-        Iterable<UserEntity> users = repository.findAll();
 
-        return Model.fromEntity(users, UserModel.class);
+        return repository.findAll();
     }
 
 
@@ -65,15 +62,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserModel updateUser(UserEntity user, long userId) throws Exception{
+    public UserEntity updateUser(UserEntity user, long userId) throws Exception{
 
-        Optional<UserEntity> optionalUser = repository.findById(userId);
-
-        if(!optionalUser.isPresent()){
-            throw new ResourceNotFoundException(String.format("Cant update user: User with id: %s not found", user.getId()));
-        }
-
-        UserEntity userToUpdate = optionalUser.get();
+        UserEntity userToUpdate = getUser(userId);
 
         userToUpdate.setName(user.getName());
         userToUpdate.setLastName(user.getLastName());
@@ -81,8 +72,6 @@ public class UserServiceImpl implements UserService {
         userToUpdate.setPassword(user.getPassword());
         userToUpdate.setAvatarImagePath(user.getAvatarImagePath());
 
-        userToUpdate = repository.save(userToUpdate);
-
-        return Model.fromEntity(userToUpdate, UserModel.class);
+        return repository.save(userToUpdate);
     }
 }

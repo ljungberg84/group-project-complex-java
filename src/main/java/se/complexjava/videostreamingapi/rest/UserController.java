@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.complexjava.videostreamingapi.entity.UserEntity;
 import se.complexjava.videostreamingapi.entity.VideoEntity;
+import se.complexjava.videostreamingapi.model.Model;
 import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.model.VideoModel;
 import se.complexjava.videostreamingapi.service.UserService;
@@ -28,7 +29,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserModel> createUser ( @Valid @RequestBody UserEntity user ) throws Exception{
 
-        UserModel userModel = userService.createUser(user);
+        UserModel userModel = Model.fromEntity(userService.createUser(user), UserModel.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
     }
@@ -37,7 +38,7 @@ public class UserController {
     @GetMapping("/{userId}")
     public ResponseEntity<UserModel> getUser (@PathVariable Long userId) throws Exception {
 
-        UserModel userModel = userService.getUser(userId);
+        UserModel userModel = Model.fromEntity(userService.getUser(userId), UserModel.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(userModel);
     }
@@ -46,7 +47,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserModel>> getUsers () {
 
-        List<UserModel> users = userService.getUsers();
+        List<UserModel> users = Model.fromEntity(userService.getUsers(), UserModel.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
@@ -64,7 +65,7 @@ public class UserController {
     @PutMapping("/{userId}")
     public ResponseEntity updateUser(@PathVariable long userId, @Valid @RequestBody UserEntity user) throws Exception{
 
-        UserModel updatedUser = userService.updateUser(user, userId);
+        UserModel updatedUser = Model.fromEntity(userService.updateUser(user, userId), UserModel.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
