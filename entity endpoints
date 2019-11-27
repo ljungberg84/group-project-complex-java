@@ -2,17 +2,20 @@ Adding entities:
   
   POST: /users
   
-  POST: /users/{ id }/video
+  POST: /users/{ id }/videos
+  GET: /user/{ id }/videos
     
   POST: /category
 
   Post: /videos/{ id }/category (ska kunna hantera listor)
   
-  POST: /videos/{ id }/users/{ id }/comment
-  
-  POST: /videos/{ id }/users/{ id }/like
-  
-  POST: /comment/{ id }/users/{ id }/like
-  
+  POST: /videos/{ id }/users/{ id }/comments
   
   GET: /videos/{ id }/comments
+  GET: /video/{ id }/likes
+  
+  POST: /videos/{ id }/users/{ id }/likes
+  
+  POST: /comment/{ id }/users/{ id }/likes
+  
+  
