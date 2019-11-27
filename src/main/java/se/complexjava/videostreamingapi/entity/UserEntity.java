@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 
 @Entity
@@ -40,6 +41,8 @@ public class UserEntity implements Serializable {
     private String avatarImagePath;
 
     private Instant joinDate;
+
+    private CategoryEntity categories;
 
     //placeholder for VideoEntity
     //OneToMany, mapped by uploadedByUser

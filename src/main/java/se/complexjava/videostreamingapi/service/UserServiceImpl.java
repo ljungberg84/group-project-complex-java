@@ -1,7 +1,6 @@
 package se.complexjava.videostreamingapi.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.UserEntity;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;

@@ -64,4 +64,18 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
+
+
+//    @PostMapping("/{userId}/videos")
+//    public ResponseEntity<VideoModel> addVideo ( @PathVariable long userId, @Valid @RequestBody VideoEntiy video ) throws Exception{
+//
+//        return null;
+//    }
+//
+//
+//    @GetMapping("/{userId}/videos")
+//    public ResponseEntity<VideoModel> getVideos ( @PathVariable long userId, @Valid @RequestBody VideoEntiy video ) throws Exception{
+//
+//        return null;
+//    }
 }
