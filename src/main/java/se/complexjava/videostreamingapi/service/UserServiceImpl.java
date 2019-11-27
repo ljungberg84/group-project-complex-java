@@ -4,12 +4,12 @@ package se.complexjava.videostreamingapi.service;
 import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.UserEntity;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
+import se.complexjava.videostreamingapi.model.Model;
 import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.repository.UserRepository;
 
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
 
 
     private UserRepository repository;
+
 
     public UserServiceImpl(UserRepository repository) {
         this.repository = repository;
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
             user.setJoinDate(Instant.now());
             UserEntity savedUser = repository.save(user);
 
-            return UserModel.fromEntity(savedUser);
+            return Model.fromEntity(savedUser, UserModel.class);
     }
 
 
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
             throw new ResourceNotFoundException(String.format("User with id: %s not found", userId));
         }
 
-        return UserModel.fromEntity(user.get());
+        return Model.fromEntity(user.get(), UserModel.class);
     }
 
 
@@ -51,11 +52,8 @@ public class UserServiceImpl implements UserService {
     public List<UserModel> getUsers() {
 
         Iterable<UserEntity> users = repository.findAll();
-        List<UserModel> userModels = new ArrayList<>();
 
-        users.forEach(user -> userModels.add(UserModel.fromEntity(user)));
-
-        return userModels;
+        return Model.fromEntity(users, UserModel.class);
     }
 
 
@@ -67,15 +65,15 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserModel updateUser(UserEntity user) throws Exception{
+    public UserModel updateUser(UserEntity user, long userId) throws Exception{
 
-        Optional<UserEntity> u = repository.findById(user.getId());
+        Optional<UserEntity> optionalUser = repository.findById(userId);
 
-        if(!u.isPresent()){
+        if(!optionalUser.isPresent()){
             throw new ResourceNotFoundException(String.format("Cant update user: User with id: %s not found", user.getId()));
         }
 
-        UserEntity  userToUpdate= u.get();
+        UserEntity userToUpdate = optionalUser.get();
 
         userToUpdate.setName(user.getName());
         userToUpdate.setLastName(user.getLastName());
@@ -83,8 +81,8 @@ public class UserServiceImpl implements UserService {
         userToUpdate.setPassword(user.getPassword());
         userToUpdate.setAvatarImagePath(user.getAvatarImagePath());
 
-        UserEntity savedUser = repository.save(userToUpdate);
+        userToUpdate = repository.save(userToUpdate);
 
-        return UserModel.fromEntity(savedUser);
+        return Model.fromEntity(userToUpdate, UserModel.class);
     }
 }

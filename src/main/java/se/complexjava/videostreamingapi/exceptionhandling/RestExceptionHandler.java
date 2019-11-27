@@ -29,6 +29,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMostSpecificCause().getMessage());
     }
 
+
     @ExceptionHandler(ResourceCreationException.class)
     public ResponseEntity handleResourceCreationException(ResourceCreationException e){
 

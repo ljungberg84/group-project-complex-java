@@ -1,4 +1,6 @@
 package se.complexjava.videostreamingapi.model;
 
-public class VideoModel {
+import java.io.Serializable;
+
+public class VideoModel extends Model implements Serializable {
 }

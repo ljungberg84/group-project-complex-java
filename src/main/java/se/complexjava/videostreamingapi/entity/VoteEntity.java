@@ -12,6 +12,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-class CategoryEntity extends BaseEntity implements Serializable {
+public class VoteEntity extends BaseEntity implements Serializable {
 
 }

@@ -18,6 +18,8 @@ public class UserController {
 
     private UserService userService;
 
+
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -59,10 +61,10 @@ public class UserController {
     }
 
 
-    @PutMapping
-    public ResponseEntity updateUser(@RequestBody UserEntity user) throws Exception{
+    @PutMapping("/{userId}")
+    public ResponseEntity updateUser(@PathVariable long userId, @Valid @RequestBody UserEntity user) throws Exception{
 
-        UserModel updatedUser = userService.updateUser(user);
+        UserModel updatedUser = userService.updateUser(user, userId);
 
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }

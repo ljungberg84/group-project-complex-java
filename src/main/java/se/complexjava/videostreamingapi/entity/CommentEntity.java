@@ -12,6 +12,5 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-class CategoryEntity extends BaseEntity implements Serializable {
-
+public class CommentEntity extends BaseEntity implements Serializable {
 }
