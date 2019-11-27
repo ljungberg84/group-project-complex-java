@@ -4,11 +4,12 @@ Adding entities:
   
   POST: /users/{ id }/video
     
+  POST: /category
+
   Post: /videos/{ id }/category/{ id }
   
-  POST: /category
   
-  POST: /videos/{ userId }
+  POST: /videos/{ id }/comment/
   
   POST: /comments/{ userId }/{ videoId }
   
