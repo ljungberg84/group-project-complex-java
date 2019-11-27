@@ -8,12 +8,8 @@ Adding entities:
 
   Post: /videos/{ id }/category/{ id }
   
+  POST: /videos/{ id }/users/{ id }/comment
   
-  POST: /videos/{ id }/comment/
+  POST: /videos/{ id }/users/{ id }/like
   
-  POST: /comments/{ userId }/{ videoId }
-  
-  POST: /like-video/{ userId }/{ videoId }
-  
-  POST: /like-comment/{ userId }/{ commentId }
-  
+  POST: /comment/{ id }/users/{ id }/like
