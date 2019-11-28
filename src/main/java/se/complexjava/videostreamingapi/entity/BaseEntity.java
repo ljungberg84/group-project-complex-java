@@ -35,7 +35,7 @@ public abstract class BaseEntity {
     public static <E extends BaseEntity, T extends Model> List<E> fromModel (Iterable<T> models, Type target){
 
         List<E> entities = new ArrayList<>();
-        models.forEach( model -> entities.add(modelMapper.map(model, target)));
+        models.forEach( model -> entities.add(fromModel(model, target)));
 
         return entities;
     }
