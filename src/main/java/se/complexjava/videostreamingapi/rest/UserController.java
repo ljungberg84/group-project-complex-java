@@ -3,6 +3,7 @@ package se.complexjava.videostreamingapi.rest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.complexjava.videostreamingapi.entity.BaseEntity;
 import se.complexjava.videostreamingapi.entity.UserEntity;
 import se.complexjava.videostreamingapi.model.Model;
 import se.complexjava.videostreamingapi.model.UserModel;
@@ -19,7 +20,6 @@ public class UserController {
     private UserService userService;
 
 
-
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -28,7 +28,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserModel> createUser ( @Valid @RequestBody UserModel user ) throws Exception{
 
-        UserEntity entity = userService.createUser(user);
+        UserEntity userEntity = BaseEntity.fromModel(user, UserEntity.class);
+        UserEntity entity = userService.createUser(userEntity);
         UserModel model = Model.fromEntity(entity, UserModel.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(model);
@@ -67,8 +68,9 @@ public class UserController {
     @PutMapping("/{userId}")
     public ResponseEntity updateUser(@PathVariable long userId, @Valid @RequestBody UserModel user) throws Exception{
 
-        UserEntity userEntity = userService.updateUser(user, userId);
-        UserModel updatedUser = Model.fromEntity(userEntity, UserModel.class);
+        UserEntity userEntity = BaseEntity.fromModel(user, UserEntity.class);
+        UserEntity updatedEntity = userService.updateUser(userEntity, userId);
+        UserModel updatedUser = Model.fromEntity(updatedEntity, UserModel.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }

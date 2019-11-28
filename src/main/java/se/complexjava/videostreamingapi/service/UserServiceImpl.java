@@ -26,13 +26,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserEntity createUser(UserModel user) throws Exception{
+    public UserEntity createUser(UserEntity user) throws Exception{
 
-            UserEntity entity = BaseEntity.fromModel(user, UserEntity.class);
 
-            entity.setJoinDate(Instant.now());
+            user.setJoinDate(Instant.now());
 
-            return repository.save(entity);
+            return repository.save(user);
     }
 
 
@@ -65,7 +64,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserEntity updateUser(UserModel user, long userId) throws Exception{
+    public UserEntity updateUser(UserEntity user, long userId) throws Exception{
 
         UserEntity userToUpdate = getUser(userId);
 
