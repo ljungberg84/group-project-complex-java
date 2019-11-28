@@ -2,11 +2,9 @@ package se.complexjava.videostreamingapi.service;
 
 
 import org.springframework.stereotype.Service;
-import se.complexjava.videostreamingapi.entity.BaseEntity;
 import se.complexjava.videostreamingapi.entity.UserEntity;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 
-import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.repository.UserRepository;
 
 
