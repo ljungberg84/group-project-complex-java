@@ -1,6 +1,5 @@
 package se.complexjava.videostreamingapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,7 +32,6 @@ public class UserEntity extends BaseEntity implements Serializable {
     @NotEmpty(message = "personal id can't be null or empty")
     private String personalId;
 
-    @JsonIgnore
     @NotEmpty(message = "password can't be null or empty")
     private String password;
 

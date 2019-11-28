@@ -2,9 +2,11 @@ package se.complexjava.videostreamingapi.service;
 
 
 import org.springframework.stereotype.Service;
+import se.complexjava.videostreamingapi.entity.BaseEntity;
 import se.complexjava.videostreamingapi.entity.UserEntity;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 
+import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.repository.UserRepository;
 
 
@@ -24,11 +26,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserEntity createUser(UserEntity user) throws Exception{
+    public UserEntity createUser(UserModel user) throws Exception{
 
-            user.setJoinDate(Instant.now());
+            UserEntity entity = BaseEntity.fromModel(user, UserEntity.class);
 
-            return repository.save(user);
+            entity.setJoinDate(Instant.now());
+
+            return repository.save(entity);
     }
 
 
@@ -61,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserEntity updateUser(UserEntity user, long userId) throws Exception{
+    public UserEntity updateUser(UserModel user, long userId) throws Exception{
 
         UserEntity userToUpdate = getUser(userId);
 

@@ -1,5 +1,6 @@
 package se.complexjava.videostreamingapi.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-class CategoryEntity extends BaseEntity implements Serializable {
+public class CategoryEntity extends BaseEntity implements Serializable {
 
 }

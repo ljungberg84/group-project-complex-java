@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.complexjava.videostreamingapi.entity.UserEntity;
-import se.complexjava.videostreamingapi.entity.VideoEntity;
 import se.complexjava.videostreamingapi.model.Model;
 import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.model.VideoModel;
@@ -27,18 +26,20 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<UserModel> createUser ( @Valid @RequestBody UserEntity user ) throws Exception{
+    public ResponseEntity<UserModel> createUser ( @Valid @RequestBody UserModel user ) throws Exception{
 
-        UserModel userModel = Model.fromEntity(userService.createUser(user), UserModel.class);
+        UserEntity entity = userService.createUser(user);
+        UserModel model = Model.fromEntity(entity, UserModel.class);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(model);
     }
 
 
     @GetMapping("/{userId}")
     public ResponseEntity<UserModel> getUser (@PathVariable Long userId) throws Exception {
 
-        UserModel userModel = Model.fromEntity(userService.getUser(userId), UserModel.class);
+        UserEntity userEntity = userService.getUser(userId);
+        UserModel userModel = Model.fromEntity(userEntity, UserModel.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(userModel);
     }
@@ -47,7 +48,8 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserModel>> getUsers () {
 
-        List<UserModel> users = Model.fromEntity(userService.getUsers(), UserModel.class);
+        Iterable<UserEntity>entities = userService.getUsers();
+        List<UserModel> users = Model.fromEntity(entities, UserModel.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
@@ -63,23 +65,24 @@ public class UserController {
 
 
     @PutMapping("/{userId}")
-    public ResponseEntity updateUser(@PathVariable long userId, @Valid @RequestBody UserEntity user) throws Exception{
+    public ResponseEntity updateUser(@PathVariable long userId, @Valid @RequestBody UserModel user) throws Exception{
 
-        UserModel updatedUser = Model.fromEntity(userService.updateUser(user, userId), UserModel.class);
+        UserEntity userEntity = userService.updateUser(user, userId);
+        UserModel updatedUser = Model.fromEntity(userEntity, UserModel.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 
 
     @PostMapping("/{userId}/videos")
-    public ResponseEntity<VideoModel> addVideo (@PathVariable long userId, @Valid @RequestBody VideoEntity video ) throws Exception{
+    public ResponseEntity<VideoModel> addVideo (@PathVariable long userId, @Valid @RequestBody VideoModel video ) throws Exception{
 
         return null;
     }
 
 
     @GetMapping("/{userId}/videos")
-    public ResponseEntity<VideoModel> getVideos ( @PathVariable long userId, @Valid @RequestBody VideoEntity video ) throws Exception{
+    public ResponseEntity<VideoModel> getVideos ( @PathVariable long userId, @Valid @RequestBody VideoModel video ) throws Exception{
 
         return null;
     }
