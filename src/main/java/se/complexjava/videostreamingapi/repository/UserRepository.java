@@ -1,8 +1,8 @@
 package se.complexjava.videostreamingapi.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import se.complexjava.videostreamingapi.entity.UserEntity;
 
-public interface UserRepository extends CrudRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
 }

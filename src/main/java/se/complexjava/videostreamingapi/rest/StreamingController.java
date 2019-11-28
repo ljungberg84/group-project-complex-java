@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-public class VideoController {
+public class StreamingController {
 
 
     @GetMapping("/videos/{name}")

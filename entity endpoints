@@ -1,0 +1,26 @@
+POST: /users 
+POST: /users/{ id }/videos
+GET: /users/{ id }/videos (ta bort om pagination funkar för nestlade objekt)
+GET: /users
+GET: /users/{ id }
+PUT: /users
+DELETE: /users/{ id }
+
+POST: /videos/{ id }/category (bodyn ska kunna hantera listor)
+POST: /videos/{ id }/users/{ id }/comments
+POST: /videos/{ id }/users/{ id }/votes
+GET: /videos/{ id }/comments (ta bort om pagination funkar för nestlade objekt)
+GET: /videos/{ id }/votes
+PUT: /videos
+DELETE: /videos/{ id }
+
+POST: /categories
+GET: /categories
+DELETE: /categories/{ id }
+
+POST: /comments/{ id }/users/{ id }/votes
+PUT: /comments
+DELETE: /comments/{ id }
+
+PUT: /votes
+DELETE: /votes/{ id }
