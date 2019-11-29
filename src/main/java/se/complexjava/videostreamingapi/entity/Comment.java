@@ -41,8 +41,8 @@ public class Comment implements Serializable {
     //@OneToMany, mapped by UserEntity
     private User user;
 
-    //@OneToOne, mappedBy VideoEntity
-    private VideoEntity video;
+    //@OneToOne, mappedBy Video
+    private Video video;
 
     @OneToMany(mappedBy = "likedByUsers")
     private Set<User> usersLiked = new HashSet<>();

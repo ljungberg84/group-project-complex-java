@@ -3,13 +3,11 @@ package se.complexjava.videostreamingapi.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.Comment;
-import se.complexjava.videostreamingapi.entity.VideoEntity;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.CommentModel;
 import se.complexjava.videostreamingapi.repository.CommentRepository;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -69,7 +67,7 @@ public class CommentServiceImpl implements CommentService {
   }
 
   @Override
-  public CommentModel getByVideoId(Long videoId) {
+  public CommentModel getCommentByVideoId(Long videoId) {
     return null;
   }
 

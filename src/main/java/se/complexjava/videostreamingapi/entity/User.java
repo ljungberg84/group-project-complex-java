@@ -50,10 +50,10 @@ public class User implements Serializable {
 
 
     @OneToMany(mappedBy = "uploadedByUser")
-    private Set<VideoEntity> uploadedVideos = new HashSet<>();
+    private Set<Video> uploadedVideos = new HashSet<>();
 
     //ManyToMany, mapped by userHistory
-    //private Set<VideoEntity>videoHistory = new HashSet<>();
+    //private Set<Video>videoHistory = new HashSet<>();
 
     //OneToMany, mapped by byUser
     //private Set<Comment> comments = new HashSet<>();
