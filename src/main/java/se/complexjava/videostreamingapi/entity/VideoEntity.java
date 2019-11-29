@@ -12,12 +12,16 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class VideoEntity extends BaseEntity implements Serializable {
+public class VideoEntity implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "user_videos",
             joinColumns = {@JoinColumn(name = "video_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private UserEntity uploadedByUser;
+    private User uploadedByUser;
 }

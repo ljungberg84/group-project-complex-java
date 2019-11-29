@@ -2,9 +2,10 @@ package se.complexjava.videostreamingapi.service;
 
 
 import org.springframework.stereotype.Service;
-import se.complexjava.videostreamingapi.entity.UserEntity;
+import se.complexjava.videostreamingapi.entity.User;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 
+import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.repository.UserRepository;
 
 
@@ -24,33 +25,32 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserEntity createUser(UserEntity user) throws Exception{
+    public UserModel createUser(UserModel user) throws Exception{
 
-
+            User userEntity = User.fromModel(user);
             user.setJoinDate(Instant.now());
 
-            return repository.save(user);
+            return UserModel.fromEntity(repository.save(userEntity));
     }
 
 
     @Override
-    public UserEntity getUser(Long userId) throws Exception{
+    public UserModel getUser(Long userId) throws Exception{
 
-        Optional<UserEntity> user = repository.findById(userId);
+        Optional<User> user = repository.findById(userId);
 
         if(!user.isPresent()){
             throw new ResourceNotFoundException(String.format("User with id: %s not found", userId));
         }
 
-        return user.get();
+        return UserModel.fromEntity(user.get());
     }
 
 
     @Override
-    public Iterable<UserEntity> getUsers() {
+    public Iterable<UserModel> getUsers() {
 
-
-        return repository.findAll();
+        return UserModel.fromEntity(repository.findAll());
     }
 
 
@@ -62,16 +62,21 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserEntity updateUser(UserEntity user, long userId) throws Exception{
+    public UserModel updateUser(UserModel user, long userId) throws Exception{
 
-        UserEntity userToUpdate = getUser(userId);
+        Optional<User> optionalUser = repository.findById(userId);
 
+        if(!optionalUser.isPresent()){
+            throw new ResourceNotFoundException(String.format("User with id: %s not found", userId));
+        }
+
+        User userToUpdate = optionalUser.get();
         userToUpdate.setName(user.getName());
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
         userToUpdate.setAvatarImagePath(user.getAvatarImagePath());
 
-        return repository.save(userToUpdate);
+        return UserModel.fromEntity(repository.save(userToUpdate));
     }
 }
