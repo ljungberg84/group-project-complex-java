@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface CommentService {
 
-  CommentModel createComment(Comment comment) throws Exception;
+  CommentModel createComment(CommentModel commentModel) throws Exception;
   CommentModel getComment(Long commentId) throws Exception;
   Iterable<CommentModel> getComments() throws Exception;
   void deleteComment(Long commentId);
-  CommentModel updateComment(Comment comment);
+  CommentModel updateComment(CommentModel commentModel);
 }

@@ -21,6 +21,8 @@ public class CommentModel implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
+  private long id;
+
   @NotEmpty(message = "text body cant'be bull or empty")
   private String textBody;
 
