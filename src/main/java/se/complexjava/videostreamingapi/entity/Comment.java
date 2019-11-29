@@ -24,7 +24,7 @@ public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //id, user, dateCreated, video, textBody, likedByUsers
+    //id, user, dateCreated, votes, textBody, likedByUsers
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,13 +38,15 @@ public class Comment implements Serializable {
     @NotEmpty(message = "date can't be null or empty")
     private Instant dateCreated;
 
-    //@OneToMany, mapped by UserEntity
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    //@OneToOne, mappedBy Video
+    @ManyToOne()
+    @JoinColumn(name = "video_id")
     private Video video;
 
-    @OneToMany(mappedBy = "likedByUsers")
+    @OneToMany(mappedBy = "comments")
     private Set<User> usersLiked = new HashSet<>();
 
 

@@ -9,7 +9,7 @@ import se.complexjava.videostreamingapi.service.CommentService;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("/comments")
 public class CommentController {
 
   private CommentService commentService;
@@ -26,7 +26,7 @@ public class CommentController {
   }
 
 
-  @GetMapping("/all")
+  @GetMapping
   public ResponseEntity<Iterable<CommentModel>> getComments() throws Exception {
     Iterable<CommentModel> commentModels = commentService.getComments();
     return ResponseEntity.status(HttpStatus.OK).body(commentModels);
@@ -54,7 +54,7 @@ public class CommentController {
     return ResponseEntity.status(HttpStatus.OK).body(commentModel);
   }
 
-  @GetMapping("/{videoId}")
+  @GetMapping("/videos/{videoId}")
   public ResponseEntity<CommentModel> getCommentByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
     CommentModel commentModel = commentService.getCommentByVideoId(videoId);
     return ResponseEntity.status(HttpStatus.OK).body(commentModel);
