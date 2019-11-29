@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
-import se.complexjava.videostreamingapi.entity.User;
 import se.complexjava.videostreamingapi.entity.Video;
 
 import java.io.Serializable;

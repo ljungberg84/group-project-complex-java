@@ -2,7 +2,6 @@ package se.complexjava.videostreamingapi.service;
 
 import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.model.VideoModel;
-import se.complexjava.videostreamingapi.model.VoteModel;
 
 import java.util.List;
 
