@@ -20,8 +20,11 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity extends BaseEntity implements Serializable {
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @NotEmpty(message = "name can't be null or empty")
     private String name;
@@ -62,14 +65,14 @@ public class UserEntity extends BaseEntity implements Serializable {
     private static ModelMapper modelMapper;
 
 
-    public static UserEntity fromModel(UserModel model){
+    public static User fromModel(UserModel model){
 
-        return modelMapper.map(model, UserEntity.class);
+        return modelMapper.map(model, User.class);
     }
 
-    public static List<UserEntity> fromModel(Iterable<UserModel> models){
+    public static List<User> fromModel(Iterable<UserModel> models){
 
-        List<UserEntity> entities = new ArrayList<>();
+        List<User> entities = new ArrayList<>();
         for (UserModel model : models) {
             entities.add(fromModel(model));
         }

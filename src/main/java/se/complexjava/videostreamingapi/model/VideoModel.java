@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VideoModel extends Model implements Serializable {
+public class VideoModel implements Serializable {
 
     private String title;
 

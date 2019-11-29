@@ -1,13 +1,13 @@
 package se.complexjava.videostreamingapi.service;
 
-import se.complexjava.videostreamingapi.entity.UserEntity;
+import se.complexjava.videostreamingapi.model.UserModel;
 
 
 public interface UserService {
 
-    UserEntity createUser(UserEntity user) throws Exception;
-    UserEntity getUser(Long userId) throws Exception;
-    Iterable<UserEntity> getUsers();
+    UserModel createUser(UserModel user) throws Exception;
+    UserModel getUser(Long userId) throws Exception;
+    Iterable<UserModel> getUsers();
     void deleteUser(Long userId);
-    UserEntity updateUser(UserEntity user, long userId) throws Exception;
+    UserModel updateUser(UserModel user, long userId) throws Exception;
 }
