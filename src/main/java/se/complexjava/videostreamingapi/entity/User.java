@@ -70,6 +70,7 @@ public class User implements Serializable {
         return modelMapper.map(model, User.class);
     }
 
+
     public static List<User> fromModel(Iterable<UserModel> models){
 
         List<User> entities = new ArrayList<>();
