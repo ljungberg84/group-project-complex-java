@@ -56,7 +56,7 @@ public class User implements Serializable {
     //private Set<VideoEntity>videoHistory = new HashSet<>();
 
     //OneToMany, mapped by byUser
-    //private Set<CommentEntity> comments = new HashSet<>();
+    //private Set<Comment> comments = new HashSet<>();
 
     //OneToMany, mapped by byUser
     //private Set<VoteEntity> votes = new HashSet<>();
