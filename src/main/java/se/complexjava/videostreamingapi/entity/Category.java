@@ -27,7 +27,7 @@ public class Category implements Serializable {
     @ManyToMany(mappedBy = "categories")
     private Set<Video> videos;
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static Category fromModel(CategoryModel model){
         return modelMapper.map(model, Category.class);
