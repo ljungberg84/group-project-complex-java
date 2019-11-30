@@ -34,13 +34,13 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{categoryId}")
-    public ResponseEntity deleteUser(@PathVariable Long categoryId) throws Exception {
+    public ResponseEntity deleteCategory(@PathVariable Long categoryId) throws Exception {
         categoryService.deleteCategory(categoryId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PutMapping("/{categoryId}")
-    public ResponseEntity updateUser(@PathVariable long categoryId, @Valid @RequestBody CategoryModel category) throws Exception{
+    public ResponseEntity updateCategory(@PathVariable long categoryId, @Valid @RequestBody CategoryModel category) throws Exception{
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.updateCategory(category, categoryId));
     }
 }
