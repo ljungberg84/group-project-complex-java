@@ -62,13 +62,15 @@ public class VideoController {
     @GetMapping("/users{userId}")
     public ResponseEntity<List<VideoModel>> getVideoByUserId (@PathVariable long userId) throws Exception{
 
-        return ResponseEntity.status(HttpStatus.OK).body(videoService.getVideosByUserId(userId));
+        //return ResponseEntity.status(HttpStatus.OK).body(videoService.getVideosByUserId(userId));
+        return null;
     }
 
 
     @GetMapping("/category{categoryId}")
     public ResponseEntity<List<VideoModel>> getVideoByCategoryId (@PathVariable long categoryId) throws Exception{
 
-        return ResponseEntity.status(HttpStatus.OK).body(videoService.getVideosByCategoryId(categoryId));
+        //return ResponseEntity.status(HttpStatus.OK).body(videoService.getVideosByCategoryId(categoryId));
+        return null;
     }
 }

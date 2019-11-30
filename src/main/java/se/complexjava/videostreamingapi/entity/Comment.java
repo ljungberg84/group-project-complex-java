@@ -46,8 +46,8 @@ public class Comment implements Serializable {
     @JoinColumn(name = "video_id")
     private Video video;
 
-    @OneToMany(mappedBy = "comments")
-    private Set<User> usersLiked = new HashSet<>();
+    //@ManyToOne
+    //private Set<User> usersLiked = new HashSet<>();
 
 
 

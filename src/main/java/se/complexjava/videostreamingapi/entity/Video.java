@@ -28,9 +28,9 @@ public class Video implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "user_videos",
-            joinColumns = {@JoinColumn(name = "video_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+            name = "user_video",
+            joinColumns = {@JoinColumn(name = "videoId")},
+            inverseJoinColumns = {@JoinColumn(name = "userId")})
     private User uploadedByUser;
 
     private static ModelMapper modelMapper = new ModelMapper();

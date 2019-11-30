@@ -55,8 +55,8 @@ public class User implements Serializable {
     //ManyToMany, mapped by userHistory
     //private Set<Video>videoHistory = new HashSet<>();
 
-    //OneToMany, mapped by byUser
-    //private Set<Comment> comments = new HashSet<>();
+    @OneToMany(mappedBy = "user")
+    private Set<Comment> comments = new HashSet<>();
 
     //OneToMany, mapped by byUser
     //private Set<Vote> votes = new HashSet<>();
