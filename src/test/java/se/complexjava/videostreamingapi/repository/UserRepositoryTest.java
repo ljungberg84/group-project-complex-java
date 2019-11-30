@@ -14,7 +14,7 @@ public class UserRepositoryTest {
 
     private String name = "name";
     private String lastName = "lastname";
-    private String email = "test@email.com";
+    private String email = "test3@email.com";
     private String personalId = "12345678";
     private String password = "123";
 
