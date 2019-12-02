@@ -25,8 +25,8 @@ public class Category implements Serializable {
     @NotEmpty(message = "name can't be null or empty")
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
-    private Set<Video> videos;
+    //@ManyToMany(mappedBy = "categories")
+    //private Set<Video> videos;
 
     private static ModelMapper modelMapper = new ModelMapper();
 
