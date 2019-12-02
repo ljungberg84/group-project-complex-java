@@ -53,7 +53,7 @@ public class CommentServiceImpl implements CommentService {
 
 
   @Override
-  public void deleteComment(Long commentId) {
+  public void deleteComment(Long commentId) throws Exception  {
     commentRepository.deleteById(commentId);
   }
 
