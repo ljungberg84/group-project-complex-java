@@ -44,7 +44,7 @@ public class UserTest {
 
     @Test
     @Order(1)
-    public void create_valid_user_test(){
+    public void save_valid_user_test(){
 
         User savedUser = userRepository.save(user);
 
@@ -54,7 +54,7 @@ public class UserTest {
 
     @Test
     @Order(2)
-    public void create_with_invalid_email_test() {
+    public void save_with_invalid_email_test() {
 
         user.setEmail("invalid.com");
 
@@ -64,7 +64,7 @@ public class UserTest {
 
     @Test
     @Order(3)
-    public void create_with_null_password_test() {
+    public void save_with_null_password_test() {
 
         user.setPassword(null);
 
@@ -75,7 +75,7 @@ public class UserTest {
 
     @Test
     @Order(4)
-    public void create_with_null_firstName_test(){
+    public void save_with_null_firstName_test(){
 
         user.setFirstName(null);
 
@@ -85,7 +85,7 @@ public class UserTest {
 
     @Test
     @Order(5)
-    public void create_with_null_lastName_test(){
+    public void save_with_null_lastName_test(){
 
         user.setLastName(null);
 
@@ -95,7 +95,7 @@ public class UserTest {
 
     @Test
     @Order(6)
-    public void create_with_null_personalId_test(){
+    public void save_with_null_personalId_test(){
 
         user.setPersonalId(null);
 

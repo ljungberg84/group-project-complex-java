@@ -61,17 +61,7 @@ public class EntityMappingTest {
 
 
     @Test
-    public void saveUserTest(){
-
-        User savedUser = userRepository.save(user);
-
-        assertEquals(user, savedUser);
-    }
-
-
-    @Test
     public void save_video_test(){
-
 
         Video video = new Video();
 
@@ -81,7 +71,6 @@ public class EntityMappingTest {
         Video savedVideo = videoRepository.save(video);
 
         assertEquals(video, savedVideo);
-
     }
 
 
