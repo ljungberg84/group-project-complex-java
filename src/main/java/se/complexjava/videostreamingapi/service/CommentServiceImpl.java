@@ -6,6 +6,7 @@ import se.complexjava.videostreamingapi.entity.Comment;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.CommentModel;
 import se.complexjava.videostreamingapi.repository.CommentRepository;
+import se.complexjava.videostreamingapi.repository.UserRepository;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -13,11 +14,13 @@ import java.util.Optional;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-  private CommentRepository repository;
+  @Autowired
+  private CommentRepository commentRepository;
+  private UserRepository userRepository;
 
   @Autowired
   public CommentServiceImpl(CommentRepository repository) {
-    this.repository = repository;
+    this.commentRepository = repository;
   }
 
 
@@ -25,13 +28,13 @@ public class CommentServiceImpl implements CommentService {
   public CommentModel createComment(CommentModel commentModel) {
     Comment comment = Comment.fromModel(commentModel);
     comment.setDateCreated(Instant.now());
-    return CommentModel.fromEntity(repository.save(comment));
+    return CommentModel.fromEntity(commentRepository.save(comment));
   }
 
 
   @Override
   public CommentModel getComment(Long commentId) throws Exception {
-    Optional<Comment> comment = repository.findById(commentId);
+    Optional<Comment> comment = commentRepository.findById(commentId);
     if (!comment.isPresent()) {
       throw new ResourceNotFoundException(String.format("Comment with id: %s not found", commentId));
     }
@@ -41,7 +44,7 @@ public class CommentServiceImpl implements CommentService {
 
   @Override
   public Iterable<CommentModel> getComments() throws Exception {
-    Iterable<Comment> comments = repository.findAll();
+    Iterable<Comment> comments = commentRepository.findAll();
     if(comments == null) {
       throw new ResourceNotFoundException(String.format("Comments not found"));
     }
@@ -51,24 +54,31 @@ public class CommentServiceImpl implements CommentService {
 
   @Override
   public void deleteComment(Long commentId) {
-    repository.deleteById(commentId);
+    commentRepository.deleteById(commentId);
   }
 
 
   @Override
-  public CommentModel updateComment(CommentModel comment) {
-    Comment commentToUpdate = repository.findById(comment.getId()).get();
-
+  public CommentModel updateComment(CommentModel comment) throws ResourceNotFoundException {
+    Comment commentToUpdate = commentRepository.findById(comment.getId()).get();
+    if(commentToUpdate == null){
+      throw new ResourceNotFoundException(String.format("Comment with id: %s not found", comment.getId()));
+    }
     commentToUpdate.setDateCreated(comment.getDateCreated());
     commentToUpdate.setTextBody(comment.getTextBody());
-
-    repository.save(commentToUpdate);
+    commentRepository.save(commentToUpdate);
     return CommentModel.fromEntity(commentToUpdate);
   }
 
+
   @Override
-  public CommentModel getCommentByVideoId(Long videoId) {
-    return null;
+  public Iterable<CommentModel> getCommentsByVideoId(Long videoId) throws ResourceNotFoundException {
+    Iterable<Comment> comments = commentRepository.findByVideoId(videoId);
+
+    if(comments == null) {
+      throw new ResourceNotFoundException(String.format("User not found"));
+    }
+    return CommentModel.fromEntity(comments);
   }
 
 }
