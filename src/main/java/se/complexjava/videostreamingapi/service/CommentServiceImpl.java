@@ -1,6 +1,5 @@
 package se.complexjava.videostreamingapi.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.Comment;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
@@ -13,9 +12,10 @@ import java.util.Optional;
 @Service
 public class CommentServiceImpl implements CommentService {
 
+//  @Autowired
   private CommentRepository repository;
 
-  @Autowired
+//  @Autowired
   public CommentServiceImpl(CommentRepository repository) {
     this.repository = repository;
   }
@@ -50,25 +50,32 @@ public class CommentServiceImpl implements CommentService {
 
 
   @Override
-  public void deleteComment(Long commentId) {
+  public void deleteComment(Long commentId) throws Exception  {
     repository.deleteById(commentId);
   }
 
 
   @Override
-  public CommentModel updateComment(CommentModel comment) {
+  public CommentModel updateComment(CommentModel comment) throws ResourceNotFoundException {
     Comment commentToUpdate = repository.findById(comment.getId()).get();
-
+    if(commentToUpdate == null){
+      throw new ResourceNotFoundException(String.format("Comment with id: %s not found", comment.getId()));
+    }
     commentToUpdate.setDateCreated(comment.getDateCreated());
     commentToUpdate.setTextBody(comment.getTextBody());
-
     repository.save(commentToUpdate);
     return CommentModel.fromEntity(commentToUpdate);
   }
 
+
   @Override
-  public CommentModel getCommentByVideoId(Long videoId) {
-    return null;
+  public Iterable<CommentModel> getCommentsByVideoId(Long videoId) throws ResourceNotFoundException {
+    Iterable<Comment> comments = repository.findByVideoId(videoId);
+
+    if(comments == null) {
+      throw new ResourceNotFoundException(String.format("User not found"));
+    }
+    return CommentModel.fromEntity(comments);
   }
 
 }
