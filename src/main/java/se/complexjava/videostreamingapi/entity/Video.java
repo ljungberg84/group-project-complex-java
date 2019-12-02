@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -32,6 +33,9 @@ public class Video implements Serializable {
             joinColumns = {@JoinColumn(name = "video_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private User uploadedByUser;
+
+    @OneToMany(mappedBy = "video")
+    private Set<VideoVote> videoVotes;
 
     private static ModelMapper modelMapper = new ModelMapper();
 
