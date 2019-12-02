@@ -39,6 +39,9 @@ public class Video implements Serializable {
 
     //private Set<VideoVote> videoVote;
 
+    @OneToMany(mappedBy = "video")
+    private Set<VideoVote> videoVotes;
+
     private static ModelMapper modelMapper = new ModelMapper();
 
 
