@@ -26,10 +26,10 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotEmpty(message = "name can't be null or empty")
+    @NotEmpty(message = "firstName can't be null or empty")
     private String firstName;
 
-    @NotEmpty(message = "last name can't be null or empty")
+    @NotEmpty(message = "last firstName can't be null or empty")
     private String lastName;
 
     @Email(message = "email must be valid format")

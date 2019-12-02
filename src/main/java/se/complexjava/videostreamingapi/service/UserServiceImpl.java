@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User userToUpdate = optionalUser.get();
-        userToUpdate.setName(user.getName());
+        userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
