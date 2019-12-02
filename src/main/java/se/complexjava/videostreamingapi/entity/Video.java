@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -26,12 +27,20 @@ public class Video implements Serializable {
 
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "video_user",
-            joinColumns = {@JoinColumn(name = "videoId")},
-            inverseJoinColumns = {@JoinColumn(name = "userId")})
-    private User uploadedByUser;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "video")
+    private Set<VideoView> viewHistory;
+
+    //mappas från comment?
+    //private Set<Comment> comments;
+
+    //private Set<VideoVote> videoVote;
+
+    @OneToMany(mappedBy = "video")
+    private Set<VideoVote> videoVotes;
 
     private static ModelMapper modelMapper = new ModelMapper();
 

@@ -78,14 +78,16 @@ public class VideoServiceImpl implements VideoService {
     //temp
     @Override
     public List<VideoModel> getVideosByUserId(long userId) {
-        return null;
+
+        return VideoModel.fromEntity(videoRepository.findByUserId(userId));
     }
 
 
     //temp
     @Override
     public List<VideoModel> getVideosByCategoryId(long categoryId) {
-        return null;
+
+        return VideoModel.fromEntity(videoRepository.findByCategoryId(categoryId));
     }
 
     //    @Override
