@@ -11,11 +11,16 @@ POST: /videos/{ id }/users/{ id }/comments
 POST: /videos/{ id }/users/{ id }/votes
 GET: /videos/{ id }/comments (ta bort om pagination funkar för nestlade objekt)
 GET: /videos/{ id }/votes
+
+POST: /videos
+GET: /videos
+GET: /videos/{ id }
 PUT: /videos
 DELETE: /videos/{ id }
 
 POST: /categories
 GET: /categories
+GET: /categories/{ id }/videos
 DELETE: /categories/{ id }
 
 POST: /comments/{ id }/users/{ id }/votes

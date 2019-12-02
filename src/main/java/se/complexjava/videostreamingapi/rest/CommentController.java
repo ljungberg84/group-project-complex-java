@@ -44,7 +44,6 @@ public class CommentController {
   public ResponseEntity<String> deleteComment(@PathVariable(name = "commentId") Long commentId) throws Exception {
     commentService.deleteComment(commentId);
     return ResponseEntity.status(HttpStatus.OK).body("Comment with id '" + commentId + "' was deleted");
-    //return ResponseEntity.status(HttpStatus.OK).body(commentModel);
   }
 
 

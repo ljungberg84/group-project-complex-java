@@ -15,10 +15,9 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CategoryEntity implements Serializable {
+public class CommentEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
 }
