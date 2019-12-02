@@ -59,16 +59,17 @@ public class User implements Serializable {
     //private Set<Comment> comments = new HashSet<>();
 
     //OneToMany, mapped by byUser
-    //private Set<VoteEntity> votes = new HashSet<>();
+    //private Set<Vote> votes = new HashSet<>();
 
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
 
     public static User fromModel(UserModel model){
 
         return modelMapper.map(model, User.class);
     }
+
 
     public static List<User> fromModel(Iterable<UserModel> models){
 

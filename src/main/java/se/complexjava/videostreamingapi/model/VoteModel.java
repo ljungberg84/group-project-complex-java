@@ -1,0 +1,16 @@
+package se.complexjava.videostreamingapi.model;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class VoteModel {
+
+    private long id;
+}
