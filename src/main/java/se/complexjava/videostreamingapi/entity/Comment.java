@@ -24,8 +24,6 @@ public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //id, user, dateCreated, votes, textBody, likedByUsers
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -46,19 +44,14 @@ public class Comment implements Serializable {
     @JoinColumn(name = "video_id")
     private Video video;
 
-    @OneToMany(mappedBy = "comments")
-    private Set<User> usersLiked = new HashSet<>();
-
-
-
+    @OneToMany(mappedBy = "comment")
+    private Set<CommentVote> commentVotes;
 
     private static ModelMapper modelMapper;
-
 
     public static Comment fromModel(CommentModel model){
         return modelMapper.map(model, Comment.class);
     }
-
 
     public static List<Comment> fromModel(Iterable<CommentModel> models){
         List<Comment> entities = new ArrayList<>();

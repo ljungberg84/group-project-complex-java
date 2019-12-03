@@ -3,10 +3,12 @@ package se.complexjava.videostreamingapi.model;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 import se.complexjava.videostreamingapi.entity.Category;
+import se.complexjava.videostreamingapi.entity.Video;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,7 +18,7 @@ public class CategoryModel {
 
     private long id;
 
-    @NotEmpty(message = "name can't be null or empty")
+    @NotEmpty(message = "firstName can't be null or empty")
     private String name;
 
     private Set<Video> videos;

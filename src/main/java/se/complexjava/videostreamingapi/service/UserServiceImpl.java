@@ -2,6 +2,7 @@ package se.complexjava.videostreamingapi.service;
 
 
 
+import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.User;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 
@@ -12,7 +13,7 @@ import se.complexjava.videostreamingapi.repository.UserRepository;
 import java.time.Instant;
 import java.util.Optional;
 
-
+@Service
 public class UserServiceImpl implements UserService {
 
 
@@ -71,7 +72,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User userToUpdate = optionalUser.get();
-        userToUpdate.setName(user.getName());
+        userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
