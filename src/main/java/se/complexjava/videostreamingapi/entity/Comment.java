@@ -24,8 +24,6 @@ public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //id, user, dateCreated, votes, textBody, likedByUsers
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

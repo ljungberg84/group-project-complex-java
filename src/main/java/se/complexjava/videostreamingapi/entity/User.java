@@ -46,7 +46,7 @@ public class User implements Serializable {
 
     private Instant joinDate;
 
-    private CategoryEntity categories;
+    private Category categories;
 
 
     @OneToMany(mappedBy = "uploadedByUser")
