@@ -24,18 +24,18 @@ public class VideoMappingTest {
     @Autowired
     VideoRepository videoRepository;
 
-    @Autowired
-    CommentRepository commentRepository;
-
-    @Autowired
-    CommentVoteRepository commentVoteRepository;
-
-    @Autowired
-    VideoVoteRepository videoVoteRepository;
-
-    @Autowired
-    VideoViewRepository videoViewRepository;
-
+//    @Autowired
+//    CommentRepository commentRepository;
+//
+//    @Autowired
+//    CommentVoteRepository commentVoteRepository;
+//
+//    @Autowired
+//    VideoVoteRepository videoVoteRepository;
+//
+//    @Autowired
+//    VideoViewRepository videoViewRepository;
+//
     @Autowired
     CategoryRepository categoryRepository;
 
