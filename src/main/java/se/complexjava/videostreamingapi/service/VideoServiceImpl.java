@@ -1,5 +1,6 @@
 package se.complexjava.videostreamingapi.service;
 
+import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.Video;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceCreationException;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+@Service
 public class VideoServiceImpl implements VideoService {
 
     private VideoRepository videoRepository;
@@ -73,17 +75,18 @@ public class VideoServiceImpl implements VideoService {
         return VideoModel.fromEntity(videoRepository.save(videoToUpdate));
     }
 
-
+    //temp
     @Override
     public List<VideoModel> getVideosByUserId(long userId) {
 
-        return VideoModel.fromEntity(videoRepository.findAll());
+        return VideoModel.fromEntity(videoRepository.findByUserId(userId));
     }
 
 
+    //temp
     @Override
     public List<VideoModel> getVideosByCategoryId(long categoryId) {
 
-        return VideoModel.fromEntity(videoRepository.getVideoByCategoryId(categoryId));
+        return VideoModel.fromEntity(videoRepository.findByCategoriesId(categoryId));
     }
 }

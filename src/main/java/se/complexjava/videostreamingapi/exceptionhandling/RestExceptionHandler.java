@@ -10,6 +10,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceCreationException;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 
+import javax.validation.ConstraintViolationException;
+
 
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -34,5 +36,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity handleResourceCreationException(ResourceCreationException e){
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity handleConstraintViolationException(ConstraintViolationException e){
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error saving entity, please check your data");
     }
 }

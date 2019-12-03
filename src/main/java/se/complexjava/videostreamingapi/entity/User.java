@@ -18,6 +18,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
@@ -26,13 +27,13 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotEmpty(message = "name can't be null or empty")
-    private String name;
+    @NotEmpty(message = "firstName can't be null or empty")
+    private String firstName;
 
-    @NotEmpty(message = "last name can't be null or empty")
+    @NotEmpty(message = "last firstName can't be null or empty")
     private String lastName;
 
-    @Email
+    @Email(message = "email must be valid format")
     @Column( unique = true )
     private String email;
 
@@ -46,19 +47,14 @@ public class User implements Serializable {
 
     private Instant joinDate;
 
-    private CategoryEntity categories;
+    //private Set<Video> uploadedVideos = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<VideoView>videoHistory = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "uploadedByUser")
-    private Set<Video> uploadedVideos = new HashSet<>();
-
-    //ManyToMany, mapped by userHistory
-    //private Set<Video>videoHistory = new HashSet<>();
-
-    //OneToMany, mapped by byUser
     //private Set<Comment> comments = new HashSet<>();
 
-    //OneToMany, mapped by byUser
     //private Set<Vote> votes = new HashSet<>();
 
 

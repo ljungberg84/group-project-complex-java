@@ -54,9 +54,9 @@ public class CommentController {
   }
 
   @GetMapping("/videos/{videoId}")
-  public ResponseEntity<CommentModel> getCommentByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
-    CommentModel commentModel = commentService.getCommentByVideoId(videoId);
-    return ResponseEntity.status(HttpStatus.OK).body(commentModel);
+  public ResponseEntity<Iterable<CommentModel>> getCommentByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
+    Iterable<CommentModel> commentModels = commentService.getCommentsByVideoId(videoId);
+    return ResponseEntity.status(HttpStatus.OK).body(commentModels);
   }
 
 
