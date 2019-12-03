@@ -30,7 +30,4 @@ public class VideoView implements Serializable {
     Video video;
 
     Instant time;
-
-
-    //caroline.svensson@alten.se // cv + personligt brev
 }

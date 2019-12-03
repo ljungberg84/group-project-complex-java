@@ -1,6 +1,6 @@
 package se.complexjava.videostreamingapi.repository;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
-public class EntityMappingTest {
+public class VideoMappingTest {
 
     @Autowired
     UserRepository userRepository;
@@ -31,7 +31,7 @@ public class EntityMappingTest {
     CommentVoteRepository commentVoteRepository;
 
     @Autowired
-    VideoViewRepository videoVoteRepository;
+    VideoVoteRepository videoVoteRepository;
 
     @Autowired
     VideoViewRepository videoViewRepository;
@@ -40,33 +40,38 @@ public class EntityMappingTest {
     CategoryRepository categoryRepository;
 
 
-    private static String firstName = "firstName";
-    private static String lastName = "lastname";
-    private static String email = "test@email.com";
-    private static String personalId = "12345678";
-    private static String password = "123";
+    private  String firstName = "firstName";
+    private  String lastName = "lastname";
+    private  String email = "test@email.com";
+    private  String personalId = "12345678";
+    private  String password = "123";
 
-    private static User user = new User();
+    private  String title = "title";
+    private String description = "description";
+
+    private User user = new User();
+
+    private Video video = new Video();
 
 
-    @BeforeAll
-    public static void createUser(){
+    @BeforeEach
+    public void createUser(){
 
+        user = new User();
+        video = new Video();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPersonalId(personalId);
         user.setPassword(password);
+
+        video.setTitle(title);
+        video.setDescription(description);
     }
 
 
     @Test
     public void save_video_test(){
-
-        Video video = new Video();
-
-        video.setDescription("description");
-        video.setTitle("title");
 
         Video savedVideo = videoRepository.save(video);
 
@@ -77,12 +82,8 @@ public class EntityMappingTest {
     @Test
     public void video_user_mapping_test(){
 
-        Video video = new Video();
-
         User savedUser = userRepository.save(user);
 
-        video.setDescription("description");
-        video.setTitle("title");
         video.setUser(savedUser);
 
         Video savedVideo = videoRepository.save(video);
@@ -95,20 +96,16 @@ public class EntityMappingTest {
     @Test
     public void video_category_mapping_test(){
 
-        Video video = new Video();
         Category category = new Category();
-
-        video.setDescription("description");
-        video.setTitle("title");
 
         category.setName("action");
 
-        video.getCategory().add(category);
+        video.getCategories().add(category);
 
         Video savedVideo = videoRepository.save(video);
 
         assertEquals(video, savedVideo);
-        assertTrue(video.getCategory().contains(category));
+        assertTrue(video.getCategories().contains(category));
     }
 
 
@@ -120,14 +117,25 @@ public class EntityMappingTest {
 
         Category savedCategory = categoryRepository.save(category);
 
-        Video video = new Video();
-        video.getCategory().add(category);
-        video.setDescription("description");
-        video.setTitle("title");
+        video.getCategories().add(savedCategory);
 
         Video video1 = videoRepository.save(video);
 
-        List<Video> videoByCategoryIdList = videoRepository.findByCategoryId(savedCategory.getId());
+        List<Video> videoByCategoryIdList = videoRepository.findByCategoriesId(savedCategory.getId());
         assertTrue(videoByCategoryIdList.contains(video1));
+    }
+
+
+    @Test
+    public void find_video_by_user_test(){
+
+        User savedUser = userRepository.save(user);
+
+        video.setUser(savedUser);
+
+        Video savedVideo = videoRepository.save(video);
+
+        List<Video> videoByUserIdList = videoRepository.findByUserId(user.getId());
+        assertTrue(videoByUserIdList.contains(savedVideo));
     }
 }

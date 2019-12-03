@@ -53,7 +53,7 @@ public class Video implements Serializable {
             name = "video_category",
             joinColumns = {@JoinColumn(name = "video_id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id")})
-    private Set<Category> category = new HashSet<>();
+    private Set<Category> categories = new HashSet<>();
 
     private static ModelMapper modelMapper = new ModelMapper();
 
