@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
-public class CommentTest {
+public class CommentEntityTest {
   private Comment comment;
   private Video video;
   private User user;
@@ -59,22 +59,8 @@ public class CommentTest {
   @Test
   public void fromModelTest(){
     commentModel = commentModel.fromEntity(comment);
-
-    comment.fromModel(commentModel);
-
-//    comment.fromModel(commentModel);
-
-
-//    Comment commentFromModel = comment.fromModel(commentModel);
-
-
-    System.out.println("_______________________________________");
-    System.out.println(commentModel.getTextBody());
-//    System.out.println(commentFromModel.toString());
-    System.out.println("_______________________________________");
-//
-//
-//    assertEquals(comment, commentFromModel);
+    Comment commentFromModel = Comment.fromModel(commentModel);
+    assertEquals(comment, commentFromModel);
   }
 
 

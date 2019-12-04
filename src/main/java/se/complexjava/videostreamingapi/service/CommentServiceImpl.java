@@ -45,7 +45,7 @@ public class CommentServiceImpl implements CommentService {
     if(comments == null) {
       throw new ResourceNotFoundException(String.format("Comments not found"));
     }
-    return CommentModel.fromEntity(comments);
+    return CommentModel.fromEntities(comments);
   }
 
 
@@ -75,7 +75,7 @@ public class CommentServiceImpl implements CommentService {
     if(comments == null) {
       throw new ResourceNotFoundException(String.format("User not found"));     ////// WHO not found? user or comment
     }
-    return CommentModel.fromEntity(comments);
+    return CommentModel.fromEntities(comments);
   }
 
   @Override
@@ -85,7 +85,7 @@ public class CommentServiceImpl implements CommentService {
     if(comments == null) {
       throw new ResourceNotFoundException(String.format("User not found"));
     }
-    return CommentModel.fromEntity(comments);
+    return CommentModel.fromEntities(comments);
   }
 
 }

@@ -42,9 +42,9 @@ public class CommentModelTest {
   }
 
   @Test
-  public void fromEntityListTest(){
-    CommentModel commentModel1 = CommentModel.fromEntity(comment1);
-    CommentModel commentModel2 = CommentModel.fromEntity(comment2);
+  public void fromEntitiesTest(){
+    commentModel1 = CommentModel.fromEntity(comment1);
+    commentModel2 = CommentModel.fromEntity(comment2);
 
     List<Comment> comments = new ArrayList<>();
     comments.add(comment1);
@@ -54,7 +54,7 @@ public class CommentModelTest {
     models.add(commentModel1);
     models.add(commentModel2);
 
-    assertEquals(models, CommentModel.fromEntity(comments));
+    assertEquals(models, CommentModel.fromEntities(comments));
   }
 
 }

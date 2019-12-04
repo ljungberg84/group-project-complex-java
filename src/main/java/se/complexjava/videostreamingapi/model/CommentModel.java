@@ -3,7 +3,6 @@ package se.complexjava.videostreamingapi.model;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 import se.complexjava.videostreamingapi.entity.Comment;
-
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.Instant;
@@ -30,13 +29,11 @@ public class CommentModel implements Serializable {
   private static ModelMapper modelMapper = new ModelMapper();
 
 
-
   public static CommentModel fromEntity(Comment entity){
     return modelMapper.map(entity, CommentModel.class);
   }
 
-
-  public static List<CommentModel> fromEntity(Iterable<Comment> entities){
+  public static List<CommentModel> fromEntities(Iterable<Comment> entities){
     List<CommentModel> models = new ArrayList<>();
     for (Comment entity : entities) {
       models.add(fromEntity(entity));
