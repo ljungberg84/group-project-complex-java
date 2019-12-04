@@ -22,11 +22,11 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotEmpty(message = "name can't be null or empty")
+    @NotEmpty(message = "firstName can't be null or empty")
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
-    private Set<Video> videos;
+    //@ManyToMany(mappedBy = "categories")
+    //private Set<Video> videos;
 
     private static ModelMapper modelMapper = new ModelMapper();
 

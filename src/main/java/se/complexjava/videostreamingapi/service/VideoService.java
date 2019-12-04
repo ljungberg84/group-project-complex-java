@@ -1,11 +1,10 @@
 package se.complexjava.videostreamingapi.service;
 
-import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.model.VideoModel;
 
 import java.util.List;
 
-@Service
+
 public interface VideoService {
 
     public VideoModel createVideo(VideoModel video);

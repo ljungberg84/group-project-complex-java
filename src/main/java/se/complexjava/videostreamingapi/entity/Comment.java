@@ -8,6 +8,7 @@ import se.complexjava.videostreamingapi.model.CommentModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -29,11 +30,11 @@ public class Comment implements Serializable {
     private long id;
 
     @Column
-    @NotEmpty(message = "text body cant'be bull or empty")
+    @NotEmpty(message = "text body cant'be null or empty")
     private String textBody;
 
     @Column
-    @NotEmpty(message = "date can't be null or empty")
+    @NotNull
     private Instant dateCreated;
 
     @ManyToOne
@@ -44,19 +45,14 @@ public class Comment implements Serializable {
     @JoinColumn(name = "video_id")
     private Video video;
 
-    @OneToMany(mappedBy = "comments")
-    private Set<User> usersLiked = new HashSet<>();
-
-
-
+    @OneToMany(mappedBy = "comment")
+    private Set<CommentVote> commentVotes;
 
     private static ModelMapper modelMapper;
-
 
     public static Comment fromModel(CommentModel model){
         return modelMapper.map(model, Comment.class);
     }
-
 
     public static List<Comment> fromModel(Iterable<CommentModel> models){
         List<Comment> entities = new ArrayList<>();

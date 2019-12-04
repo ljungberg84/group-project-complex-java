@@ -18,7 +18,7 @@ public class CategoryModel {
 
     private long id;
 
-    @NotEmpty(message = "name can't be null or empty")
+    @NotEmpty(message = "firstName can't be null or empty")
     private String name;
 
     private Set<Video> videos;
