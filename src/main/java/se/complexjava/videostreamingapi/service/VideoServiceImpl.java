@@ -93,13 +93,13 @@ public class VideoServiceImpl implements VideoService {
     //    @Override
 //    public List<VideoModel> getVideosByUserId(long userId) {
 //
-//        return VideoModel.fromEntity(videoRepository.findAll());
+//        return VideoModel.fromEntities(videoRepository.findAll());
 //    }
 
 
 //    @Override
 //    public List<VideoModel> getVideosByCategoryId(long categoryId) {
 //
-//        return VideoModel.fromEntity(videoRepository.getVideoByCategoryId(categoryId));
+//        return VideoModel.fromEntities(videoRepository.getVideoByCategoryId(categoryId));
 //    }
 }

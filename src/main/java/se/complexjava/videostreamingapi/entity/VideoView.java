@@ -3,11 +3,15 @@ package se.complexjava.videostreamingapi.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 import se.complexjava.videostreamingapi.entity.composite_key.VideoViewKey;
+import se.complexjava.videostreamingapi.model.VideoViewModel;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -30,4 +34,18 @@ public class VideoView implements Serializable {
     Video video;
 
     Instant time;
+
+    private static ModelMapper modelMapper = new ModelMapper();
+
+    public static VideoView fromModel(VideoViewModel model){
+        return modelMapper.map(model, VideoView.class);
+    }
+
+    public static List<VideoView> fromModels(Iterable<VideoViewModel> models){
+        List<VideoView> entities = new ArrayList<>();
+        for (VideoViewModel model : models) {
+            entities.add(fromModel(model));
+        }
+        return entities;
+    }
 }
