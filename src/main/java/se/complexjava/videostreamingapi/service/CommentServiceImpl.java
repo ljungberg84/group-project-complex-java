@@ -69,8 +69,18 @@ public class CommentServiceImpl implements CommentService {
 
 
   @Override
-  public Iterable<CommentModel> getCommentsByVideoId(Long videoId) throws ResourceNotFoundException {
+  public Iterable<CommentModel> findCommentsByVideoId(Long videoId) throws ResourceNotFoundException {
     Iterable<Comment> comments = repository.findByVideoId(videoId);
+
+    if(comments == null) {
+      throw new ResourceNotFoundException(String.format("User not found"));     ////// WHO not found? user or comment
+    }
+    return CommentModel.fromEntity(comments);
+  }
+
+  @Override
+  public Iterable<CommentModel> findCommentsByUserId(Long userId) throws ResourceNotFoundException {
+    Iterable<Comment> comments = repository.findByUserId(userId);
 
     if(comments == null) {
       throw new ResourceNotFoundException(String.format("User not found"));

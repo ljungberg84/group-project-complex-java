@@ -25,12 +25,7 @@ public class VideoViewTest {
   @BeforeEach
   public void init(){
     videoView = new VideoView();
-    videoView.se
-
-
-    comment = new Comment();
-    comment.setTextBody("comment text");
-    comment.setDateCreated(Instant.now());
+//    videoView.se
   }
 
 }

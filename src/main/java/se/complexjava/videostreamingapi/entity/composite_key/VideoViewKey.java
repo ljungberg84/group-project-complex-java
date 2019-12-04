@@ -14,7 +14,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class VideoViewKey implements Serializable {
 
-
     @Column(name = "user_id")
     Long userId;
 

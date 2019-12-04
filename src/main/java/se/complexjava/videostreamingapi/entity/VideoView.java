@@ -16,10 +16,8 @@ import java.time.Instant;
 @NoArgsConstructor
 public class VideoView implements Serializable {
 
-    // ?? constructor
-
     @EmbeddedId
-    VideoViewKey id;
+    VideoViewKey id = new VideoViewKey();
 
     @ManyToOne
     @MapsId("user_id")
