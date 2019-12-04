@@ -16,7 +16,6 @@ import javax.validation.ConstraintViolationException;
 import java.time.Instant;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
@@ -110,7 +109,5 @@ public class CommentRepositoryTest {
     List<Comment> foundedComments = commentRepository.findByUserId(savedUser.getId());
     assertTrue(foundedComments.contains(savedComment));
   }
-
-
 
 }

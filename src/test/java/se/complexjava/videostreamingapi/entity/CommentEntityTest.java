@@ -1,69 +1,56 @@
 package se.complexjava.videostreamingapi.entity;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import se.complexjava.videostreamingapi.entity.User;
-import se.complexjava.videostreamingapi.entity.Video;
-import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import org.junit.jupiter.api.*;
-import se.complexjava.videostreamingapi.entity.Comment;
 import se.complexjava.videostreamingapi.model.CommentModel;
-import se.complexjava.videostreamingapi.repository.CommentRepository;
-
-import javax.validation.ConstraintViolationException;
 import java.time.Instant;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 public class CommentEntityTest {
-  private Comment comment;
-  private Video video;
-  private User user;
-  private CommentModel commentModel;
 
+  private Comment comment1;
+  private Comment comment2;
+  private CommentModel commentModel1;
+  private CommentModel commentModel2;
 
   @BeforeEach
   public void init(){
-    comment = new Comment();
-    comment.setTextBody("My comment text");
-    comment.setDateCreated(Instant.now());
+    comment1 = new Comment();
+    comment1.setTextBody("My comment text 1");
+    comment1.setDateCreated(Instant.now());
 
-    video = new Video();
-    video.setTitle("My video title");
-    video.setDescription("My video description");
-
-    user = new User();
-    user.setFirstName("Bart");
-    user.setLastName("Simpson");
-    user.setEmail("bart.simpson@mail.com");
-    user.setAvatarImagePath("url to my im age");
-    user.setPersonalId("123");
-    user.setPassword("pass");
-
-    commentModel = new CommentModel();
-//    commentModel.setId(11L);
-//    commentModel.setTextBody("My comment model text");
-//    commentModel.setDateCreated(Instant.now());
+    comment2 = new Comment();
+    comment2.setTextBody("My comment text 2");
+    comment2.setDateCreated(Instant.now());
   }
-
 
 
   @Test
   public void fromModelTest(){
-    commentModel = commentModel.fromEntity(comment);
-    Comment commentFromModel = Comment.fromModel(commentModel);
-    assertEquals(comment, commentFromModel);
+    commentModel1 = CommentModel.fromEntity(comment1);
+    Comment commentFromModel = Comment.fromModel(commentModel1);
+    assertEquals(comment1, commentFromModel);
   }
 
-
-
-
+  @Test
+  public void fromModelsTest(){
+    commentModel1 = CommentModel.fromEntity(comment1);
+    commentModel2 = CommentModel.fromEntity(comment2);
+    List<CommentModel> models = new ArrayList<>();
+    models.add(commentModel1);
+    models.add(commentModel2);
+    List<Comment> comments = Comment.fromModels(models);
+    assertEquals(comments, Comment.fromModels(models));
+  }
 }
