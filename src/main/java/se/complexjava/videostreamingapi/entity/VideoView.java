@@ -1,8 +1,6 @@
 package se.complexjava.videostreamingapi.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.modelmapper.ModelMapper;
 import se.complexjava.videostreamingapi.entity.composite_key.VideoViewKey;
 import se.complexjava.videostreamingapi.model.VideoViewModel;
@@ -17,7 +15,10 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class VideoView implements Serializable {
 
     @EmbeddedId
