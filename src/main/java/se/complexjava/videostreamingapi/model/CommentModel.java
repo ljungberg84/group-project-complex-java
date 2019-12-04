@@ -1,9 +1,6 @@
 package se.complexjava.videostreamingapi.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.modelmapper.ModelMapper;
 import se.complexjava.videostreamingapi.entity.Comment;
 
@@ -17,6 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class CommentModel implements Serializable {
 
   private static final long serialVersionUID = 1L;
