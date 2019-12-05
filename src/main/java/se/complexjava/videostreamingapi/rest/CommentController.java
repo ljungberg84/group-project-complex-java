@@ -65,12 +65,12 @@ public class CommentController {
 
 
   @GetMapping("/videos/video/{videoId}")
-  public ResponseEntity<Iterable<CommentModel>> findCommentByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
+  public ResponseEntity<Iterable<CommentModel>> findCommentsByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
     Iterable<CommentModel> commentModels = commentService.findCommentsByVideoId(videoId);
     return ResponseEntity.status(HttpStatus.OK).body(commentModels);
   }
   @GetMapping("/videos/user/{userId}")
-  public ResponseEntity<Iterable<CommentModel>> findCommentByUserId(@PathVariable("userId") Long userId) throws Exception {
+  public ResponseEntity<Iterable<CommentModel>> findCommentsByUserId(@PathVariable("userId") Long userId) throws Exception {
     Iterable<CommentModel> commentModels = commentService.findCommentsByUserId(userId);
     return ResponseEntity.status(HttpStatus.OK).body(commentModels);
   }

@@ -108,10 +108,9 @@ public class VideoViewRepositoryTest {
     Video savedVideo = videoRepository.save(video);
     videoView.setVideo(savedVideo);
 
-
     // funkar ej om jag inte skappar den key manuellt, ???
-    //VideoViewKey key = new VideoViewKey(savedUser.getId(), savedVideo.getId());
-    //videoView.setId(key);
+    VideoViewKey key = new VideoViewKey(savedUser.getId(), savedVideo.getId());
+    videoView.setId(key);
 
     VideoView savedVideoView = videoViewRepository.save(videoView);
 
