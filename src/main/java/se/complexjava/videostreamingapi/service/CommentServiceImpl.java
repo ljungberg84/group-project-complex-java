@@ -5,17 +5,14 @@ import se.complexjava.videostreamingapi.entity.Comment;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.CommentModel;
 import se.complexjava.videostreamingapi.repository.CommentRepository;
-
 import java.time.Instant;
 import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
-//  @Autowired
   private CommentRepository repository;
 
-//  @Autowired
   public CommentServiceImpl(CommentRepository repository) {
     this.repository = repository;
   }
@@ -73,7 +70,7 @@ public class CommentServiceImpl implements CommentService {
     Iterable<Comment> comments = repository.findByVideoId(videoId);
 
     if(comments == null) {
-      throw new ResourceNotFoundException(String.format("User not found"));     ////// WHO not found? user or comment
+      throw new ResourceNotFoundException(String.format("Not found"));
     }
     return CommentModel.fromEntities(comments);
   }
@@ -83,7 +80,7 @@ public class CommentServiceImpl implements CommentService {
     Iterable<Comment> comments = repository.findByUserId(userId);
 
     if(comments == null) {
-      throw new ResourceNotFoundException(String.format("User not found"));
+      throw new ResourceNotFoundException(String.format("Not found"));
     }
     return CommentModel.fromEntities(comments);
   }

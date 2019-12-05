@@ -47,7 +47,7 @@ public class CommentRepositoryTest {
     user.setFirstName("Bart");
     user.setLastName("Simpson");
     user.setEmail("bart.simpson@mail.com");
-    user.setAvatarImagePath("url to my im age");
+    user.setAvatarImagePath("url to my image");
     user.setPersonalId("123");
     user.setPassword("pass");
   }

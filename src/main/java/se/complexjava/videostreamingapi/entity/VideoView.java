@@ -6,6 +6,7 @@ import se.complexjava.videostreamingapi.entity.composite_key.VideoViewKey;
 import se.complexjava.videostreamingapi.model.VideoViewModel;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -34,7 +35,9 @@ public class VideoView implements Serializable {
     @JoinColumn(name = "video_id")
     Video video;
 
-    Instant time;
+    @Column
+    @NotNull
+    private Instant time;
 
     private static ModelMapper modelMapper = new ModelMapper();
 

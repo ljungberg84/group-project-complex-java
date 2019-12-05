@@ -7,6 +7,7 @@ import se.complexjava.videostreamingapi.entity.VideoView;
 import se.complexjava.videostreamingapi.entity.composite_key.VideoViewKey;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class VideoViewModel implements Serializable {
   // ????????? ska man ha den i model, new instance???
   VideoViewKey id = new VideoViewKey();
 
+  @NotEmpty(message = "time can't be null or empty")
   Instant time;
 
   private static ModelMapper modelMapper = new ModelMapper();
