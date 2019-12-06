@@ -26,16 +26,15 @@ public class VideoView implements Serializable {
     VideoViewKey id = new VideoViewKey();
 
     @ManyToOne
-    @MapsId("user_id")
+    @MapsId("userId")
     @JoinColumn(name = "user_id")
     User user;
 
     @ManyToOne
-    @MapsId("video_id")
+    @MapsId("videoId")
     @JoinColumn(name = "video_id")
     Video video;
 
-    @Column
     @NotNull
     private Instant time;
 

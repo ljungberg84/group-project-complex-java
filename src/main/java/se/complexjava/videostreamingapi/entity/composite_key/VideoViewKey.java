@@ -15,10 +15,10 @@ import java.io.Serializable;
 @ToString
 public class VideoViewKey implements Serializable {
 
-    @Column(name = "user_id")
+    //@Column(name = "userId")
     Long userId;
 
-    @Column(name = "video_id")
+    //@Column(name = "videoId")
     Long videoId;
 
 

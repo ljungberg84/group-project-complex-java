@@ -28,11 +28,9 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
     @NotEmpty(message = "text body cant'be null or empty")
     private String textBody;
 
-    @Column
     @NotNull
     private Instant dateCreated;
 
