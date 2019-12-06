@@ -12,6 +12,7 @@ import se.complexjava.videostreamingapi.entity.Video;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -112,8 +113,8 @@ public class CommentVoteMappingTest {
         commentVote.setComment(savedComment);
         CommentVote savedCommentVote = commentVoteRepository.save(commentVote);
 
-        CommentVote foundCommentVote = commentVoteRepository.findByIdUserIdAndCommentId(savedUser.getId(), savedComment.getId());
+        Optional<CommentVote> foundCommentVote = commentVoteRepository.findByIdUserIdAndCommentId(savedUser.getId(), savedComment.getId());
 
-        assertEquals(savedCommentVote, foundCommentVote);
+        assertEquals(savedCommentVote, foundCommentVote.get());
     }
 }
