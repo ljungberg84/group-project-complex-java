@@ -5,13 +5,15 @@ import org.springframework.stereotype.Repository;
 import se.complexjava.videostreamingapi.entity.VideoView;
 import se.complexjava.videostreamingapi.entity.composite_key.VideoViewKey;
 
+import java.util.List;
+
 
 @Repository
 public interface VideoViewRepository extends JpaRepository<VideoView, VideoViewKey> {
 
-    Iterable<VideoView> findByVideoId(long videoId);
+    List<VideoView> findByVideoId(long videoId);
 
-    Iterable<VideoView> findByUserId(long userId);
+    List<VideoView> findByUserId(long userId);
 
 
 }

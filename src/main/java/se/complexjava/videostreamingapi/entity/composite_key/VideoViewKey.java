@@ -8,18 +8,14 @@ import java.io.Serializable;
 
 @Getter
 @Setter
+@ToString
 @Embeddable
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class VideoViewKey implements Serializable {
 
-
-    @Column(name = "user_id")
     Long userId;
 
-    @Column(name = "video_id")
     Long videoId;
-
-
 }

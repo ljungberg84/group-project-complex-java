@@ -25,7 +25,6 @@ public class VideoVote implements Serializable {
     @EmbeddedId
     private VideoVoteKey id;
 
-
     @ManyToOne
     @MapsId("user_id")
     @JoinColumn(name = "user_id")
