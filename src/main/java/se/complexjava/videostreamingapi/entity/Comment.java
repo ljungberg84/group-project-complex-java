@@ -8,6 +8,7 @@ import se.complexjava.videostreamingapi.model.CommentModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class Comment implements Serializable {
     private String textBody;
 
     @Column
-    @NotEmpty(message = "date can't be null or empty")
+    @NotNull(message = "date can't be null")
     private Instant dateCreated;
 
     @ManyToOne
