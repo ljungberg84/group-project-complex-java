@@ -3,7 +3,6 @@ package se.complexjava.videostreamingapi.entity;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 import se.complexjava.videostreamingapi.entity.composite_key.CommentVoteKey;
-import se.complexjava.videostreamingapi.model.CategoryModel;
 import se.complexjava.videostreamingapi.model.CommentVoteModel;
 
 import javax.persistence.*;
