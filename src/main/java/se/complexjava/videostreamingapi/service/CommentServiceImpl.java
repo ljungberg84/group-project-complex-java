@@ -5,17 +5,14 @@ import se.complexjava.videostreamingapi.entity.Comment;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.CommentModel;
 import se.complexjava.videostreamingapi.repository.CommentRepository;
-
 import java.time.Instant;
 import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
-//  @Autowired
   private CommentRepository repository;
 
-//  @Autowired
   public CommentServiceImpl(CommentRepository repository) {
     this.repository = repository;
   }
@@ -45,7 +42,7 @@ public class CommentServiceImpl implements CommentService {
     if(comments == null) {
       throw new ResourceNotFoundException(String.format("Comments not found"));
     }
-    return CommentModel.fromEntity(comments);
+    return CommentModel.fromEntities(comments);
   }
 
 
@@ -69,13 +66,23 @@ public class CommentServiceImpl implements CommentService {
 
 
   @Override
-  public Iterable<CommentModel> getCommentsByVideoId(Long videoId) throws ResourceNotFoundException {
+  public Iterable<CommentModel> findCommentsByVideoId(Long videoId) throws ResourceNotFoundException {
     Iterable<Comment> comments = repository.findByVideoId(videoId);
 
     if(comments == null) {
-      throw new ResourceNotFoundException(String.format("User not found"));
+      throw new ResourceNotFoundException(String.format("Not found"));
     }
-    return CommentModel.fromEntity(comments);
+    return CommentModel.fromEntities(comments);
+  }
+
+  @Override
+  public Iterable<CommentModel> findCommentsByUserId(Long userId) throws ResourceNotFoundException {
+    Iterable<Comment> comments = repository.findByUserId(userId);
+
+    if(comments == null) {
+      throw new ResourceNotFoundException(String.format("Not found"));
+    }
+    return CommentModel.fromEntities(comments);
   }
 
 }

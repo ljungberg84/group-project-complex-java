@@ -53,11 +53,26 @@ public class CommentController {
     return ResponseEntity.status(HttpStatus.OK).body(commentModel);
   }
 
+  /*
   @GetMapping("/videos/{videoId}")
-  public ResponseEntity<Iterable<CommentModel>> getCommentByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
-    Iterable<CommentModel> commentModels = commentService.getCommentsByVideoId(videoId);
+  public ResponseEntity<Iterable<CommentModel>> findCommentByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
+    Iterable<CommentModel> commentModels = commentService.findCommentsByVideoId(videoId);
     return ResponseEntity.status(HttpStatus.OK).body(commentModels);
   }
+  */
 
+  // changed endpoind for findCommentsByVideoId => to implement findCommentsByUserId
+
+
+  @GetMapping("/videos/video/{videoId}")
+  public ResponseEntity<Iterable<CommentModel>> findCommentsByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
+    Iterable<CommentModel> commentModels = commentService.findCommentsByVideoId(videoId);
+    return ResponseEntity.status(HttpStatus.OK).body(commentModels);
+  }
+  @GetMapping("/videos/user/{userId}")
+  public ResponseEntity<Iterable<CommentModel>> findCommentsByUserId(@PathVariable("userId") Long userId) throws Exception {
+    Iterable<CommentModel> commentModels = commentService.findCommentsByUserId(userId);
+    return ResponseEntity.status(HttpStatus.OK).body(commentModels);
+  }
 
 }
