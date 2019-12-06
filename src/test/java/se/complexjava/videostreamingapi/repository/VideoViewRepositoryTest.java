@@ -102,9 +102,6 @@ public class VideoViewRepositoryTest {
     Video savedVideo = videoRepository.save(video);
     videoView.setVideo(savedVideo);
 
-//    VideoViewKey key = new VideoViewKey(savedUser.getId(), savedVideo.getId());
-//    videoView.setId(key);
-
     VideoView savedVideoView = videoViewRepository.save(videoView);
     List<VideoView> foundedVideoViews = videoViewRepository.findByVideoId(savedVideo.getId());
 
@@ -119,15 +116,7 @@ public class VideoViewRepositoryTest {
     Video savedVideo = videoRepository.save(video);
     videoView.setVideo(savedVideo);
 
-    // funkar ej om jag inte skappar den key manuellt, ???
-//    VideoViewKey key = new VideoViewKey(savedUser.getId(), savedVideo.getId());
-//    videoView.setId(key);
-
     VideoView savedVideoView = videoViewRepository.save(videoView);
-
-    System.out.println("________________________________________________________");
-    System.out.println(savedVideoView);
-    System.out.println("________________________________________________________");
 
     List<VideoView> foundedVideoViews = videoViewRepository.findByUserId(savedUser.getId());
 

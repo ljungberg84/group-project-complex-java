@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class VideoVoteMappingTest {
 
     private  String firstName = "firstName";
-    private  String lastName = "lastname";
+    private  String lastName = "lastName";
     private  String email = "test@email.com";
     private  String personalId = "12345678";
     private  String password = "123";
@@ -82,9 +82,6 @@ public class VideoVoteMappingTest {
         vote.setValue(true);
 
         VideoVote savedVote = videoVoteRepository.save(vote);
-        System.out.println("==================" + savedUser);
-
-        System.out.println("==================" + savedVote);
 
         List<VideoVote> vVList = videoVoteRepository.findByUserId(savedUser.getId());
 

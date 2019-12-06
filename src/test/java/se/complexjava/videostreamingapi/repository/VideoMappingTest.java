@@ -5,14 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import se.complexjava.videostreamingapi.entity.Category;
-import se.complexjava.videostreamingapi.entity.User;
-import se.complexjava.videostreamingapi.entity.Video;
+import se.complexjava.videostreamingapi.entity.*;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
@@ -24,18 +23,9 @@ public class VideoMappingTest {
     @Autowired
     VideoRepository videoRepository;
 
-//    @Autowired
-//    CommentRepository commentRepository;
-//
-//    @Autowired
-//    CommentVoteRepository commentVoteRepository;
-//
-//    @Autowired
-//    VideoVoteRepository videoVoteRepository;
-//
-//    @Autowired
-//    VideoViewRepository videoViewRepository;
-//
+    @Autowired
+    VideoVoteRepository videoVoteRepository;
+
     @Autowired
     CategoryRepository categoryRepository;
 
@@ -137,5 +127,22 @@ public class VideoMappingTest {
 
         List<Video> videoByUserIdList = videoRepository.findByUserId(user.getId());
         assertTrue(videoByUserIdList.contains(savedVideo));
+    }
+
+
+    @Test//this test should be in videoVote test instead
+    public void videoVote_from_video_mapping_test(){
+
+        User savedUser = userRepository.save(user);
+        Video savedVideo = videoRepository.save(video);
+
+        VideoVote videoVote = new VideoVote(savedUser, savedVideo);
+        videoVote.setValue(true);
+
+        VideoVote savedVideoVote = videoVoteRepository.save(videoVote);
+
+        assertEquals(videoVote, savedVideoVote);
+        assertNotNull(savedVideo);
+        assertEquals(savedVideo, savedVideoVote.getVideo());
     }
 }

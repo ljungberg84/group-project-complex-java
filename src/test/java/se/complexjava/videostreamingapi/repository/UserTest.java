@@ -14,7 +14,6 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest// for persistens layer testing
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)//so not to auto configure for h2
 public class UserTest {
 
@@ -22,28 +21,29 @@ public class UserTest {
     @Autowired
     UserRepository userRepository;
 
-    private static String firstName = "firstName";
-    private static String lastName = "lastName";
-    private static String email = "test@email.com";
-    private static String personalId = "12345678";
-    private static String password = "123";
+    private String firstName = "firstName";
+    private String lastName = "lastName";
+    private String email = "test@email.com";
+    private String personalId = "12345678";
+    private String password = "123";
 
-    private static User user = new User();
+    private User user = new User();
 
 
-    @BeforeAll
-    public static void createUser(){
+    @BeforeEach
+    public void createUser(){
+        User u = new User();
+        u.setFirstName(firstName);
+        u.setLastName(lastName);
+        u.setEmail(email);
+        u.setPersonalId(personalId);
+        u.setPassword(password);
 
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setPersonalId(personalId);
-        user.setPassword(password);
+        user = u;
     }
 
 
     @Test
-    @Order(1)
     public void save_valid_user_test(){
 
         User savedUser = userRepository.save(user);
@@ -53,7 +53,6 @@ public class UserTest {
 
 
     @Test
-    @Order(2)
     public void save_with_invalid_email_test() {
 
         user.setEmail("invalid.com");
@@ -63,7 +62,6 @@ public class UserTest {
 
 
     @Test
-    @Order(3)
     public void save_with_null_password_test() {
 
         user.setPassword(null);
@@ -74,7 +72,6 @@ public class UserTest {
 
 
     @Test
-    @Order(4)
     public void save_with_null_firstName_test(){
 
         user.setFirstName(null);
@@ -84,7 +81,6 @@ public class UserTest {
 
 
     @Test
-    @Order(5)
     public void save_with_null_lastName_test(){
 
         user.setLastName(null);
@@ -94,7 +90,6 @@ public class UserTest {
 
 
     @Test
-    @Order(6)
     public void save_with_null_personalId_test(){
 
         user.setPersonalId(null);
