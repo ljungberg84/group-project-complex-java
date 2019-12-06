@@ -10,5 +10,6 @@ public interface CommentService {
   Iterable<CommentModel> getComments() throws Exception;
   void deleteComment(Long commentId) throws Exception;
   CommentModel updateComment(CommentModel commentModel) throws ResourceNotFoundException;
-  Iterable<CommentModel> getCommentsByVideoId(Long videoId) throws ResourceNotFoundException;
+  Iterable<CommentModel> findCommentsByVideoId(Long videoId) throws ResourceNotFoundException;
+  Iterable<CommentModel> findCommentsByUserId(Long userId) throws ResourceNotFoundException;
 }

@@ -15,7 +15,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@ToString
 public class VideoVoteKey implements Serializable {
 
     //@GeneratedValue

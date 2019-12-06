@@ -2,13 +2,11 @@ package se.complexjava.videostreamingapi.entity.composite_key;
 
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Getter
 @Setter
-@ToString
 @Embeddable
 @EqualsAndHashCode
 @NoArgsConstructor

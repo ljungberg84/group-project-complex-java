@@ -42,8 +42,6 @@ public class UserMappingTest {
     private Video video;
 
 
-
-
     @BeforeEach
     public void createUser(){
         Video video = new Video();
@@ -64,24 +62,25 @@ public class UserMappingTest {
     }
 
 
-//    @Test
-//    public void video_view_from_user_test(){
-//
-//        User savedUser = userRepository.save(user);
-//        Video savedVideo = videoRepository.save(video);
-//
-//        VideoView view = new VideoView(savedUser, savedVideo);
-//        view.setTime(Instant.now());
-//
-//        VideoView savedVideoView = videoViewRepository.save(view);
-//
-//        savedUser.getVideoHistory().add(view);
-//        Optional<User> optionalUser = userRepository.findById(savedUser.getId());
-//
-//        if(optionalUser.isPresent()){
-//            User retrievedUser = optionalUser.get();
-//            assertTrue(retrievedUser.getVideoHistory().contains(savedVideoView));
-//        }
-//    }
+    @Test
+    public void video_view_from_user_test(){
 
+        User savedUser = userRepository.save(user);
+        Video savedVideo = videoRepository.save(video);
+
+        VideoView view = new VideoView();
+        view.setUser(savedUser);
+        view.setVideo(savedVideo);
+        view.setTime(Instant.now());
+
+        VideoView savedVideoView = videoViewRepository.save(view);
+
+        savedUser.getVideoHistory().add(view);
+        Optional<User> optionalUser = userRepository.findById(savedUser.getId());
+
+        if(optionalUser.isPresent()){
+            User retrievedUser = optionalUser.get();
+            assertTrue(retrievedUser.getVideoHistory().contains(savedVideoView));
+        }
+    }
 }
