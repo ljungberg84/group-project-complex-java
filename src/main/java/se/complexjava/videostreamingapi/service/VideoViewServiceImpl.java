@@ -27,7 +27,7 @@
 //
 //
 //  @Override
-//  public VideoViewModel getVideoView(Long videoViewId) throws Exception {
+//  public VideoViewModel getVideoViewByVideoId(Long videoViewId) throws Exception {
 //    Optional<VideoView> videoView = repository.findById(videoViewId);
 //    if (!videoView.isPresent()) {
 //      throw new ResourceNotFoundException(String.format("VideoView with id: %s not found", videoViewId));
