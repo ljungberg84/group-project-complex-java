@@ -53,7 +53,7 @@ public class User implements Serializable {
     private Set<VideoView>videoHistory = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
-    private Set<Flag> flags = new HashSet<>();
+    private Set<FlagVideo> flags = new HashSet<>();
 
     //private Set<Comment> comments = new HashSet<>();
 

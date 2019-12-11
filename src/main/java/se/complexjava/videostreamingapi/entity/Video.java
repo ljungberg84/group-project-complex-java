@@ -47,7 +47,7 @@ public class Video implements Serializable {
     private Set<VideoVote> videoVotes = new HashSet<>();
 
     @OneToMany(mappedBy = "video")
-    private Set<Flag> flags = new HashSet<>();
+    private Set<FlagVideo> flags = new HashSet<>();
     
     @ManyToMany
     @JoinTable(

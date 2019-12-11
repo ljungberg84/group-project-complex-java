@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import se.complexjava.videostreamingapi.entity.composite_key.FlagKey;
+import se.complexjava.videostreamingapi.entity.composite_key.FlagVideoKey;
 
 @Entity
 @Getter
@@ -21,10 +21,10 @@ import se.complexjava.videostreamingapi.entity.composite_key.FlagKey;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Flag {
+public class FlagVideo {
 
 	@EmbeddedId
-	private FlagKey id = new FlagKey();
+	private FlagVideoKey id = new FlagVideoKey();
 	
 	@ManyToOne
 	@MapsId("userId")

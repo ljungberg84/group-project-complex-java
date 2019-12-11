@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class FlagKey implements Serializable{
+public class FlagVideoKey implements Serializable{
 
 	Long userId;
 	
