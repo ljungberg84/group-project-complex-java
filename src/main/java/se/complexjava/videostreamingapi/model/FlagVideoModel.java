@@ -25,6 +25,7 @@ public class FlagVideoModel implements Serializable{
 	private long id;
 	User user;
 	Video video;
+	String description;
 	Instant dateFlagged;
 	
 	
