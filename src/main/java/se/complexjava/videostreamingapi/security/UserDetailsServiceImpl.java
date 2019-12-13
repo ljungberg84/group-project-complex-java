@@ -13,14 +13,14 @@ import java.util.ArrayList;
 
 @Component(value = "UserDS")
 @Service
-public class UserDS implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
   @Autowired
   private UserService userService;
 
-  public UserDS(UserService userService) {
+  public UserDetailsServiceImpl(UserService userService) {
     this.userService = userService;
-    //createAdmin();
+//    createAdmin();
   }
 
   @Override

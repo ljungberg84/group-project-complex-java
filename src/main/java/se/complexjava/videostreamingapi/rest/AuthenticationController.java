@@ -25,15 +25,18 @@ class AuthenticationController {
   private UserDetailsService userDetailsService;
 
   @RequestMapping({"/test"})
-  public String firstPage() {
+  public String test() {
     return "ITHS Controller";
   }
 
+  @RequestMapping({"/hello"})
+  public String hello() {
+    return "HELLO";
+  }
+
+
   @PostMapping("/authenticate")
   public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-
-
-
 
     final String username = authenticationRequest.getUsername();
     final String password = authenticationRequest.getPassword();

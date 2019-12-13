@@ -7,7 +7,7 @@ import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotF
 
 import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.repository.UserRepository;
-import se.complexjava.videostreamingapi.security.HashEncoder;
+import se.complexjava.videostreamingapi.security.PasswordEncoderImpl;
 
 
 import java.time.Instant;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private HashEncoder hashEncoder = new HashEncoder();
+    private PasswordEncoderImpl hashEncoder = new PasswordEncoderImpl();
 
     private UserRepository repository;
 

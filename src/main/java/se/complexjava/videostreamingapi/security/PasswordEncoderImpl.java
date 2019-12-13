@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
-public class HashEncoder implements PasswordEncoder {
+public class PasswordEncoderImpl implements PasswordEncoder {
 
   // “PBKDF2WithHmacSHA1“ is a Java implementation of “PBKDF2” algorithm
   private static String algoritm = "PBKDF2WithHmacSHA1";
