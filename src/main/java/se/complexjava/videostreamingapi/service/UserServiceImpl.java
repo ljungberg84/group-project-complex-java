@@ -1,13 +1,13 @@
 package se.complexjava.videostreamingapi.service;
 
 
-
 import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.User;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 
 import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.repository.UserRepository;
+import se.complexjava.videostreamingapi.security.PasswordEncoderImpl;
 
 
 import java.time.Instant;
@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private PasswordEncoderImpl hashEncoder = new PasswordEncoderImpl();
 
     private UserRepository repository;
 
@@ -26,21 +27,23 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserModel createUser(UserModel user) throws Exception{
+    public UserModel createUser(UserModel user) throws Exception {
+        String strongPassword = hashEncoder.encode(user.getPassword());
+        user.setPassword(strongPassword);
 
-            User userEntity = User.fromModel(user);
-            user.setJoinDate(Instant.now());
+        User userEntity = User.fromModel(user);
+        user.setJoinDate(Instant.now());
 
-            return UserModel.fromEntity(repository.save(userEntity));
+        return UserModel.fromEntity(repository.save(userEntity));
     }
 
 
     @Override
-    public UserModel getUser(Long userId) throws Exception{
+    public UserModel getUser(Long userId) throws Exception {
 
         Optional<User> user = repository.findById(userId);
 
-        if(!user.isPresent()){
+        if (!user.isPresent()) {
             throw new ResourceNotFoundException(String.format("User with id: %s not found", userId));
         }
 
@@ -58,16 +61,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long userId) {
 
-         repository.deleteById(userId);
+        repository.deleteById(userId);
     }
 
 
     @Override
-    public UserModel updateUser(UserModel user, long userId) throws Exception{
+    public UserModel updateUser(UserModel user, long userId) throws Exception {
 
         Optional<User> optionalUser = repository.findById(userId);
 
-        if(!optionalUser.isPresent()){
+        if (!optionalUser.isPresent()) {
             throw new ResourceNotFoundException(String.format("User with id: %s not found", userId));
         }
 
@@ -80,4 +83,15 @@ public class UserServiceImpl implements UserService {
 
         return UserModel.fromEntity(repository.save(userToUpdate));
     }
+
+
+    @Override
+    public String getPasswordByEmail(String email) throws Exception {
+        Optional<User> user = repository.findByEmail(email);
+        if (!user.isPresent()) {
+            throw new ResourceNotFoundException(String.format("User with email: %s not found", email));
+        }
+        return user.get().getPassword();
+    }
+
 }
