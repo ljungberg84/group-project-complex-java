@@ -1,5 +1,6 @@
 package se.complexjava.videostreamingapi.entity;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import se.complexjava.videostreamingapi.model.FlagVideoModel;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class FlagVideo {
+public class FlagVideo implements Serializable{
 
 	@EmbeddedId
 	private FlagVideoKey id = new FlagVideoKey();

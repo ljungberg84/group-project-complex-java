@@ -1,5 +1,6 @@
 package se.complexjava.videostreamingapi.model;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,9 @@ import se.complexjava.videostreamingapi.entity.Video;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FlagVideoModel {
+public class FlagVideoModel implements Serializable{
 
+	
 	private long id;
 	User user;
 	Video video;
