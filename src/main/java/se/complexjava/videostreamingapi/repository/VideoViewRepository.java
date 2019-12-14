@@ -14,7 +14,6 @@ public interface VideoViewRepository extends JpaRepository<VideoView, VideoRepos
 
     List<VideoView> findByUserId(long userId);
 
-
     void deleteByVideoId(Long videoId);
 
     void deleteByUserId(Long userId);
