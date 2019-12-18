@@ -1,34 +1,49 @@
 package se.complexjava.videostreamingapi.service;
 
 import org.springframework.stereotype.Service;
+import se.complexjava.videostreamingapi.entity.User;
+import se.complexjava.videostreamingapi.entity.Video;
 import se.complexjava.videostreamingapi.entity.VideoView;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.VideoViewModel;
+import se.complexjava.videostreamingapi.repository.UserRepository;
+import se.complexjava.videostreamingapi.repository.VideoRepository;
 import se.complexjava.videostreamingapi.repository.VideoViewRepository;
 import java.time.Instant;
-import java.util.List;
 
 @Service
 public class VideoViewServiceImpl implements VideoViewService {
 
-  private VideoViewRepository repository;
+  private UserRepository userRepository;
+  private VideoRepository videoRepository;
+  private VideoViewRepository videoViewRepository;
 
-  public VideoViewServiceImpl(VideoViewRepository repository) {
-    this.repository = repository;
+  public VideoViewServiceImpl(UserRepository userRepository, VideoRepository videoRepository,
+                              VideoViewRepository repository) {
+    this.userRepository = userRepository;
+    this.videoRepository = videoRepository;
+    this.videoViewRepository = repository;
   }
 
 
   @Override
-  public VideoViewModel createVideoView(VideoViewModel videoViewModel) {
+  public VideoViewModel createVideoView(Long userId, Long videoId, VideoViewModel videoViewModel) {
     VideoView videoView = VideoView.fromModel(videoViewModel);
     videoView.setTime(Instant.now());
-    return VideoViewModel.fromEntity(repository.save(videoView));
+
+    User user = userRepository.getOne(userId);
+    Video video = videoRepository.getOne(videoId);
+
+    videoView.setUser(user);
+    videoView.setVideo(video);
+
+    return VideoViewModel.fromEntity(videoViewRepository.save(videoView));
   }
 
 
   @Override
   public Iterable<VideoViewModel> getVideoViews() throws Exception {
-    Iterable<VideoView> videoViews = repository.findAll();
+    Iterable<VideoView> videoViews = videoViewRepository.findAll();
     if(videoViews == null) {
       throw new ResourceNotFoundException(String.format("VideoViews not found"));
     }
@@ -38,24 +53,24 @@ public class VideoViewServiceImpl implements VideoViewService {
 
   @Override
   public void deleteVideoViewByVideoId(Long videoId) throws Exception  {
-    repository.deleteByVideoId(videoId);
+    videoViewRepository.deleteByVideoId(videoId);
   }
 
   @Override
   public void deleteVideoViewByUserId(Long userId) throws Exception  {
-    repository.deleteByUserId(userId);
+    videoViewRepository.deleteByUserId(userId);
   }
 
 
   @Override
   public VideoViewModel updateVideoView(VideoViewModel videoView) throws ResourceNotFoundException {
-//    VideoView videoViewToUpdate = repository.findById(videoView.getId()).get();
+//    VideoView videoViewToUpdate = videoViewRepository.findById(videoView.getId()).get();
 //    if(videoViewToUpdate == null){
 //      throw new ResourceNotFoundException(String.format("VideoView with id: %s not found", videoView.getId()));
 //    }
 //    videoViewToUpdate.setDateCreated(videoView.getDateCreated());
 //    videoViewToUpdate.setTextBody(videoView.getTextBody());
-//    repository.save(videoViewToUpdate);
+//    videoViewRepository.save(videoViewToUpdate);
 //    return VideoViewModel.fromEntity(videoViewToUpdate);
     return null;  //
   }
@@ -63,7 +78,7 @@ public class VideoViewServiceImpl implements VideoViewService {
 
   @Override
   public Iterable<VideoViewModel> findVideoViewsByVideoId(Long videoId) throws ResourceNotFoundException {
-    Iterable<VideoView> videoViews = repository.findByVideoId(videoId);
+    Iterable<VideoView> videoViews = videoViewRepository.findByVideoId(videoId);
 
     if(videoViews == null) {
       throw new ResourceNotFoundException(String.format("Not found"));
@@ -73,7 +88,7 @@ public class VideoViewServiceImpl implements VideoViewService {
 
   @Override
   public Iterable<VideoViewModel> findVideoViewsByUserId(Long userId) throws ResourceNotFoundException {
-    Iterable<VideoView> videoViews = repository.findByUserId(userId);
+    Iterable<VideoView> videoViews = videoViewRepository.findByUserId(userId);
 
     if(videoViews == null) {
       throw new ResourceNotFoundException(String.format("Not found"));

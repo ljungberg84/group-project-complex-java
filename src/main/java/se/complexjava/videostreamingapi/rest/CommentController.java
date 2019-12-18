@@ -19,9 +19,13 @@ public class CommentController {
   }
 
 
-  @PostMapping
-  public ResponseEntity<CommentModel> createComment(@Valid @RequestBody CommentModel commentJsonBody) throws Exception {
-    CommentModel commentModel = commentService.createComment(commentJsonBody);
+  @PostMapping("/{userId}/{videoId}")
+  public ResponseEntity<CommentModel> createComment(
+          @PathVariable(name = "userId") Long userId,
+          @PathVariable(name = "videoId") Long videoId,
+          @Valid @RequestBody CommentModel commentJsonBody) throws Exception {
+
+    CommentModel commentModel = commentService.createComment(userId, videoId, commentJsonBody);
     return ResponseEntity.status(HttpStatus.CREATED).body(commentModel);
   }
 

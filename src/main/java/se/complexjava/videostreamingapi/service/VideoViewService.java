@@ -3,11 +3,9 @@ package se.complexjava.videostreamingapi.service;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.VideoViewModel;
 
-import java.util.List;
-
 public interface VideoViewService {
 
-  VideoViewModel createVideoView(VideoViewModel videoViewModel) throws Exception;
+  VideoViewModel createVideoView(Long userId, Long videoId, VideoViewModel videoViewModel) throws Exception;
 
   Iterable<VideoViewModel> getVideoViews() throws Exception;
 

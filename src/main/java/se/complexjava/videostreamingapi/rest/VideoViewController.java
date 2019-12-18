@@ -19,9 +19,13 @@ public class VideoViewController {
   }
 
 
-  @PostMapping
-  public ResponseEntity<VideoViewModel> createVideoView(@Valid @RequestBody VideoViewModel videoViewJsonBody) throws Exception {
-    VideoViewModel videoViewModel = videoViewService.createVideoView(videoViewJsonBody);
+  @PostMapping("/{userId}/{videoId}")
+  public ResponseEntity<VideoViewModel> createVideoView(
+          @PathVariable(name = "userId") Long userId,
+          @PathVariable(name = "videoId") Long videoId,
+          @Valid @RequestBody VideoViewModel videoViewJsonBody) throws Exception {
+
+    VideoViewModel videoViewModel = videoViewService.createVideoView(userId, videoId, videoViewJsonBody);
     return ResponseEntity.status(HttpStatus.CREATED).body(videoViewModel);
   }
 

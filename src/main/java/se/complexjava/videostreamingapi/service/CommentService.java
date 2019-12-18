@@ -5,7 +5,7 @@ import se.complexjava.videostreamingapi.model.CommentModel;
 
 public interface CommentService {
 
-  CommentModel createComment(CommentModel commentModel) throws Exception;
+  CommentModel createComment(Long userId, Long videoId, CommentModel commentModel) throws Exception;
   CommentModel getComment(Long commentId) throws Exception;
   Iterable<CommentModel> getComments() throws Exception;
   void deleteComment(Long commentId) throws Exception;
