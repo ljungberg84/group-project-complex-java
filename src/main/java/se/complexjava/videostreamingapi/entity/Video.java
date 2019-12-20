@@ -31,17 +31,14 @@ public class Video implements Serializable {
     @NotEmpty
     private String description;
 
+    private VideoState state = VideoState.UNPROCESSED;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "video")
     private Set<VideoView> viewHistory;
-
-    //mappas från comment?
-    //private Set<Comment> comments;
-
-    //private Set<VideoVote> videoVote;
 
     @OneToMany(mappedBy = "video")
     private Set<VideoVote> videoVotes = new HashSet<>();
