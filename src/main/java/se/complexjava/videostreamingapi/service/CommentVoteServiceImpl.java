@@ -1,7 +1,9 @@
 package se.complexjava.videostreamingapi.service;
 
 import org.springframework.stereotype.Service;
+import se.complexjava.videostreamingapi.entity.Comment;
 import se.complexjava.videostreamingapi.entity.CommentVote;
+import se.complexjava.videostreamingapi.entity.User;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.CommentVoteModel;
 import se.complexjava.videostreamingapi.repository.CommentVoteRepository;
@@ -12,14 +14,24 @@ import java.util.Optional;
 public class CommentVoteServiceImpl implements CommentVoteService {
 
     private CommentVoteRepository commentVoteRepository;
+    private UserService userService;
+    private CommentService commentService;
 
-    public CommentVoteServiceImpl(CommentVoteRepository commentVoteRepository) {
+    public CommentVoteServiceImpl(CommentVoteRepository commentVoteRepository, UserService userService, CommentService commentService) {
         this.commentVoteRepository = commentVoteRepository;
+        this.userService = userService;
+        this.commentService = commentService;
     }
 
     @Override
-    public CommentVoteModel createCommentVote(CommentVoteModel commentVote) throws Exception {
+    public CommentVoteModel createCommentVote(CommentVoteModel commentVote, long userId, long commentId) throws Exception {
+        User foundUser = User.fromModel(userService.getUser(userId));
+        Comment foundComment = Comment.fromModel(commentService.getComment(commentId));
+
         CommentVote commentVoteEntity = CommentVote.fromModel(commentVote);
+        commentVoteEntity.setUser(foundUser);
+        commentVoteEntity.setComment(foundComment);
+
         return CommentVoteModel.fromEntity(commentVoteRepository.save(commentVoteEntity));
     }
 
