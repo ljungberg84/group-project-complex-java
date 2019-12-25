@@ -70,8 +70,8 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public CommentModel updateComment(CommentModel comment) throws ResourceNotFoundException {
-        Comment commentToUpdate = commentRepository.findById(comment.getId()).get();
+    public CommentModel updateComment(CommentModel comment, Long commentId) throws ResourceNotFoundException {
+        Comment commentToUpdate = commentRepository.findById(commentId).get();
         if (commentToUpdate == null) {
             throw new ResourceNotFoundException(String.format("Comment with id: %s not found", comment.getId()));
         }

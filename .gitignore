@@ -17,6 +17,10 @@ target/
 videos/*
 !videos/placeholder.txt
 
+
+#properties
+src\main\resources\application.properties
+
 ### IntelliJ IDEA ###
 .idea
 *.iws

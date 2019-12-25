@@ -23,9 +23,9 @@ public class CommentController {
   public ResponseEntity<CommentModel> createComment(
           @PathVariable(name = "userId") Long userId,
           @PathVariable(name = "videoId") Long videoId,
-          @Valid @RequestBody CommentModel commentJsonBody) throws Exception {
+          @Valid @RequestBody CommentModel comment) throws Exception {
 
-    CommentModel commentModel = commentService.createComment(userId, videoId, commentJsonBody);
+    CommentModel commentModel = commentService.createComment(userId, videoId, comment);
     return ResponseEntity.status(HttpStatus.CREATED).body(commentModel);
   }
 
@@ -51,21 +51,12 @@ public class CommentController {
   }
 
 
-  @PostMapping("/{commentId}")
-  public ResponseEntity<CommentModel> getComment(@Valid @RequestBody CommentModel commentJsonBody) throws Exception {
-    CommentModel commentModel = commentService.updateComment(commentJsonBody);
+  @PutMapping("/{commentId}")
+  public ResponseEntity<CommentModel> updateComment(@Valid @RequestBody CommentModel comment,
+                                                    @PathVariable("commentId") Long commentId) throws Exception {
+    CommentModel commentModel = commentService.updateComment(comment, commentId);
     return ResponseEntity.status(HttpStatus.OK).body(commentModel);
   }
-
-  /*
-  @GetMapping("/videos/{videoId}")
-  public ResponseEntity<Iterable<CommentModel>> findCommentByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
-    Iterable<CommentModel> commentModels = commentService.findCommentsByVideoId(videoId);
-    return ResponseEntity.status(HttpStatus.OK).body(commentModels);
-  }
-  */
-
-  // changed endpoind for findCommentsByVideoId => to implement findCommentsByUserId
 
 
   @GetMapping("/videos/video/{videoId}")
@@ -73,6 +64,8 @@ public class CommentController {
     Iterable<CommentModel> commentModels = commentService.findCommentsByVideoId(videoId);
     return ResponseEntity.status(HttpStatus.OK).body(commentModels);
   }
+
+
   @GetMapping("/videos/user/{userId}")
   public ResponseEntity<Iterable<CommentModel>> findCommentsByUserId(@PathVariable("userId") Long userId) throws Exception {
     Iterable<CommentModel> commentModels = commentService.findCommentsByUserId(userId);

@@ -12,7 +12,7 @@ public interface VideoViewService {
   void deleteVideoViewByVideoId(Long videoId) throws Exception;
   void deleteVideoViewByUserId(Long userId) throws Exception;
 
-  VideoViewModel updateVideoView(VideoViewModel videoViewModel) throws ResourceNotFoundException;
+  VideoViewModel updateVideoView(VideoViewModel videoViewModel, Long videoViewId) throws ResourceNotFoundException;
 
   Iterable<VideoViewModel> findVideoViewsByVideoId(Long videoId) throws ResourceNotFoundException;
   Iterable<VideoViewModel> findVideoViewsByUserId(Long userId) throws ResourceNotFoundException;
