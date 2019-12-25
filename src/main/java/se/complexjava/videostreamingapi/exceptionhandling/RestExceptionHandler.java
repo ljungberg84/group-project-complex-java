@@ -43,4 +43,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error saving entity, please check your data");
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity handleException(Exception e){
+        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("Exception: " + e.getMessage());
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity handleRuntimeException(RuntimeException e){
+        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("Runtime Exception: " + e.getMessage());
+    }
 }
