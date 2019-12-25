@@ -93,5 +93,4 @@ public class VideoViewServiceImpl implements VideoViewService {
     }
     return VideoViewModel.fromEntities(videoViews);
   }
-
 }
