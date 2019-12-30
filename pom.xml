@@ -16,7 +16,6 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-
 	</properties>
 
 	<dependencies>
@@ -124,9 +123,6 @@
 		</dependency>
 
 
-
-
-
 	</dependencies>
 
 	<build>
@@ -165,13 +161,13 @@
 				<artifactId>fabric8-maven-plugin</artifactId>
 				<version>4.3.1</version>
 			</plugin>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
+<!--			<plugin>-->
+<!--				<artifactId>maven-compiler-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					<source>1.8</source>-->
+<!--					<target>1.8</target>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
