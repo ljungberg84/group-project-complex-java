@@ -5,6 +5,8 @@ import se.complexjava.videostreamingapi.entity.VideoView;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.VideoViewModel;
 import se.complexjava.videostreamingapi.repository.VideoViewRepository;
+
+import java.sql.SQLException;
 import java.time.Instant;
 import java.util.List;
 

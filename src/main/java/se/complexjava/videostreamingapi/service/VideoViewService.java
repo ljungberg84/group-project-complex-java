@@ -3,6 +3,7 @@ package se.complexjava.videostreamingapi.service;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.VideoViewModel;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface VideoViewService {

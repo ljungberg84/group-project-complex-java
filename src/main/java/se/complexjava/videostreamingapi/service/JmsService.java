@@ -1,5 +1,7 @@
 package se.complexjava.videostreamingapi.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
@@ -8,7 +10,6 @@ import se.complexjava.videostreamingapi.entity.VideoState;
 import se.complexjava.videostreamingapi.repository.VideoRepository;
 
 import java.util.Map;
-import java.util.logging.Logger;
 
 @Service
 public class JmsService {
@@ -19,7 +20,7 @@ public class JmsService {
 
     private VideoRepository videoRepository;
 
-    private Logger logger = Logger.getLogger("JmsService");
+    private Logger logger = LoggerFactory.getLogger(JmsService.class);
 
     @Autowired
     public JmsService(VideoRepository videoRepository) {
