@@ -4,9 +4,12 @@ import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.Comment;
 import se.complexjava.videostreamingapi.entity.CommentVote;
 import se.complexjava.videostreamingapi.entity.User;
+import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceCreationException;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
 import se.complexjava.videostreamingapi.model.CommentVoteModel;
+import se.complexjava.videostreamingapi.repository.CommentRepository;
 import se.complexjava.videostreamingapi.repository.CommentVoteRepository;
+import se.complexjava.videostreamingapi.repository.UserRepository;
 
 import java.util.Optional;
 
@@ -14,25 +17,29 @@ import java.util.Optional;
 public class CommentVoteServiceImpl implements CommentVoteService {
 
     private CommentVoteRepository commentVoteRepository;
-    private UserService userService;
-    private CommentService commentService;
+    private UserRepository userRepository;
+    private CommentRepository commentRepository;
 
-    public CommentVoteServiceImpl(CommentVoteRepository commentVoteRepository, UserService userService, CommentService commentService) {
+    public CommentVoteServiceImpl(CommentVoteRepository commentVoteRepository, UserRepository userRepository, CommentRepository commentRepository) {
         this.commentVoteRepository = commentVoteRepository;
-        this.userService = userService;
-        this.commentService = commentService;
+        this.userRepository = userRepository;
+        this.commentRepository = commentRepository;
     }
 
     @Override
     public CommentVoteModel createCommentVote(CommentVoteModel commentVote, long userId, long commentId) throws Exception {
-        User foundUser = User.fromModel(userService.getUser(userId));
-        Comment foundComment = Comment.fromModel(commentService.getComment(commentId));
+        Optional<User> foundUser = userRepository.findById(userId);
+        Optional<Comment> foundComment = commentRepository.findById(commentId);
 
-        CommentVote commentVoteEntity = CommentVote.fromModel(commentVote);
-        commentVoteEntity.setUser(foundUser);
-        commentVoteEntity.setComment(foundComment);
+        if (foundUser.isPresent() && foundComment.isPresent()) {
+            CommentVote commentVoteEntity = CommentVote.fromModel(commentVote);
+            commentVoteEntity.setUser(foundUser.get());
+            commentVoteEntity.setComment(foundComment.get());
 
-        return CommentVoteModel.fromEntity(commentVoteRepository.save(commentVoteEntity));
+            return CommentVoteModel.fromEntity(commentVoteRepository.save(commentVoteEntity));
+        } else {
+            throw new ResourceCreationException("User or comment not found");
+        }
     }
 
     @Override
