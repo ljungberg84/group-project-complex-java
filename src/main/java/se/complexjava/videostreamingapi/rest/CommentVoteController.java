@@ -18,12 +18,13 @@ public class CommentVoteController {
         this.commentVoteService = commentVoteService;
     }
 
-    @PostMapping
-    public ResponseEntity<CommentVoteModel> createCommentVote (@Valid @RequestBody CommentVoteModel commentVote) throws Exception {
-        return ResponseEntity.status(HttpStatus.CREATED).body(commentVoteService.createCommentVote(commentVote));
+    @PostMapping("/user/{userId}/comment/{commentId}")
+    public ResponseEntity<CommentVoteModel> createCommentVote (@Valid @RequestBody CommentVoteModel commentVote,
+                                                               @PathVariable long userId, @PathVariable long commentId) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body(commentVoteService.createCommentVote(commentVote, userId, commentId));
     }
 
-    @GetMapping("/{userId}/{commentId}")
+    @GetMapping("/user/{userId}/comment/{commentId}")
     public ResponseEntity<CommentVoteModel> getCommentVote (@PathVariable long userId, @PathVariable long commentId) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(commentVoteService.getCommentVote(userId, commentId));
     }
@@ -33,13 +34,13 @@ public class CommentVoteController {
         return ResponseEntity.status(HttpStatus.OK).body(commentVoteService.getCommentVotes());
     }
 
-    @DeleteMapping("/{userId}/{commentId}")
+    @DeleteMapping("/user/{userId}/comment/{commentId}")
     public ResponseEntity deleteCommentVote(@PathVariable long userId, @PathVariable long commentId) throws Exception {
         commentVoteService.deleteCommentVote(userId, commentId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping("/{userId}/{commentId}")
+    @PutMapping("/user/{userId}/comment/{commentId}")
     public ResponseEntity updateCommentVote(@Valid @RequestBody CommentVoteModel commentVote, @PathVariable long userId, @PathVariable long commentId) throws Exception{
         return ResponseEntity.status(HttpStatus.OK).body(commentVoteService.updateCommentVote(commentVote, userId, commentId));
     }
