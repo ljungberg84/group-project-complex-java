@@ -37,8 +37,12 @@ public class JmsService {
                 Video video = videoRepository.findByUserIdAndTitle(userId, title);
                 video.setState(VideoState.UPLOADED);
                 videoRepository.save(video);
+                logger.info("videostate for: {}&{} set to UPLOADED", userId, title);
+
             }else{
                 videoRepository.deleteByUserIdAndTitle(userId, title);
+                logger.info(String.format("setVideoUploaded(), removing video: {}&{} due to unsuccessful upload", userId, title));
+
             }
         }catch (NullPointerException e){
             logger.info(String.format("setVideoUploaded(), video state could not be updated because not found: userId: %s, title: %s", userId, title));
@@ -54,6 +58,7 @@ public class JmsService {
             Video video = videoRepository.findByUserIdAndTitle(userId, title);
             video.setState(VideoState.ENCODED);
             videoRepository.save(video);
+            logger.info("videostate for: {}&{} set to ENCODED", userId, title);
         }catch(NullPointerException e){
             logger.info(String.format("setVideoEncoded(), video state could not be updated because not found: userId: %s, title: %s", userId, title));
         }
