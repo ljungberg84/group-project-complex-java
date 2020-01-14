@@ -30,9 +30,9 @@ public class UserServiceImpl implements UserService {
     public UserModel createUser(UserModel user) throws Exception {
         String strongPassword = hashEncoder.encode(user.getPassword());
         user.setPassword(strongPassword);
+        user.setJoinDate(Instant.now());
 
         User userEntity = User.fromModel(user);
-        user.setJoinDate(Instant.now());
 
         return UserModel.fromEntity(repository.save(userEntity));
     }

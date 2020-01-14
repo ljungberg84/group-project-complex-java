@@ -1,6 +1,9 @@
 package se.complexjava.videostreamingapi.exceptionhandling;
 
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,16 @@ import javax.validation.ConstraintViolationException;
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     //TODO: make a response error serializable class to return in responseBody
+    //com.mysql.cj.jdbc.exceptions.CommunicationsException
+
+    private Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
+
+    @ExceptionHandler(CommunicationsException.class)
+    public void handleCommunicationsException(CommunicationsException e){
+
+        logger.info("{}. database could be unavailable(this is normal on startup)", e.getMessage());
+
+    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity handleResourceNotFound(ResourceNotFoundException e){
@@ -42,5 +55,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity handleConstraintViolationException(ConstraintViolationException e){
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error saving entity, please check your data");
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity handleException(Exception e){
+        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("Exception: " + e.getMessage());
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity handleRuntimeException(RuntimeException e){
+        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("Runtime Exception: " + e.getMessage());
     }
 }
