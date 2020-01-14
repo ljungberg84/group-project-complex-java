@@ -44,7 +44,7 @@ public class CommentVoteMappingTest {
         user.setLastName("Bbb");
         user.setPersonalId("111");
         user.setEmail("aaa@mail.com");
-        user.setPassword("aaa");
+//        user.setPassword("aaa");
 
         video = new Video();
         video.setTitle("Aaa");

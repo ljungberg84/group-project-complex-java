@@ -50,7 +50,7 @@ public class UserMappingTest {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPersonalId(personalId);
-        user.setPassword(password);
+//        user.setPassword(password);
 
 
         video.setTitle(title);

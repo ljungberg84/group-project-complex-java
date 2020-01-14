@@ -37,7 +37,7 @@ public class UserTest {
         u.setLastName(lastName);
         u.setEmail(email);
         u.setPersonalId(personalId);
-        u.setPassword(password);
+//        u.setPassword(password);
 
         user = u;
     }
@@ -64,7 +64,7 @@ public class UserTest {
     @Test
     public void save_with_null_password_test() {
 
-        user.setPassword(null);
+//        user.setPassword(null);
 
         assertThrows(ConstraintViolationException.class, () -> userRepository.save(user));
     }

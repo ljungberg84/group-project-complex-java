@@ -49,7 +49,7 @@ public class CommentRepositoryTest {
     user.setEmail("bart.simpson@mail.com");
     user.setAvatarImagePath("url to my image");
     user.setPersonalId("123");
-    user.setPassword("pass");
+//    user.setPassword("pass");
   }
 
 

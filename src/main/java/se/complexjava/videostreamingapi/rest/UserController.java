@@ -12,38 +12,35 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController {
 
-
     private UserService userService;
-
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-
-    @PostMapping
-    public ResponseEntity<UserModel> createUser ( @Valid @RequestBody UserModel user ) throws Exception{
+    @PostMapping("/register")
+        public ResponseEntity<UserModel> createUser(@Valid @RequestBody UserModel user) throws Exception {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user));
     }
 
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserModel> getUser (@PathVariable Long userId) throws Exception {
+    public ResponseEntity<UserModel> getUser(@PathVariable Long userId) throws Exception {
 
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(userId));
     }
 
 
     @GetMapping
-    public ResponseEntity<Iterable<UserModel>> getUsers () {
+    public ResponseEntity<Iterable<UserModel>> getUsers() {
 
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUsers());
     }
 
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity deleteUser(@PathVariable Long userId){
+    public ResponseEntity deleteUser(@PathVariable Long userId) {
 
         userService.deleteUser(userId);
 
@@ -52,8 +49,9 @@ public class UserController {
 
 
     @PutMapping("/{userId}")
-    public ResponseEntity updateUser(@PathVariable long userId, @Valid @RequestBody UserModel user) throws Exception{
+    public ResponseEntity updateUser(@PathVariable long userId, @Valid @RequestBody UserModel user) throws Exception {
 
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(user, userId));
     }
+
 }

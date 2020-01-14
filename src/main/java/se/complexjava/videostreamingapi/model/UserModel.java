@@ -34,9 +34,6 @@ public class UserModel implements Serializable {
     @Email(message = "email must be valid")
     private String email;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String password;
-
     @NotEmpty(message = "personal id can't be null or empty")
     private String personalId;
 
@@ -45,10 +42,6 @@ public class UserModel implements Serializable {
     private Instant joinDate;
 
     private static ModelMapper modelMapper = new ModelMapper();
-
-    static{
-        modelMapper.typeMap(User.class, UserModel.class).addMappings(mp -> mp.skip( UserModel::setPassword));
-    }
 
 
     public static UserModel fromEntity(User entity){

@@ -1,6 +1,6 @@
 package se.complexjava.videostreamingapi.service;
 
-import se.complexjava.videostreamingapi.model.UserModel;
+        import se.complexjava.videostreamingapi.model.UserModel;
 
 public interface UserService {
 
@@ -9,6 +9,4 @@ public interface UserService {
     Iterable<UserModel> getUsers();
     void deleteUser(Long userId);
     UserModel updateUser(UserModel user, long userId) throws Exception;
-
-  String getPasswordByEmail(String email) throws Exception;
 }
