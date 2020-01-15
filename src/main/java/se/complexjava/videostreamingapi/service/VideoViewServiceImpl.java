@@ -9,6 +9,8 @@ import se.complexjava.videostreamingapi.model.VideoViewModel;
 import se.complexjava.videostreamingapi.repository.UserRepository;
 import se.complexjava.videostreamingapi.repository.VideoRepository;
 import se.complexjava.videostreamingapi.repository.VideoViewRepository;
+
+import java.sql.SQLException;
 import java.time.Instant;
 
 @Service

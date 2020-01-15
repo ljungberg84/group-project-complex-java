@@ -16,6 +16,8 @@ target/
 #video resources
 videos/*
 !videos/placeholder.txt
+src/main/resources
+src/test/resources
 
 
 #properties

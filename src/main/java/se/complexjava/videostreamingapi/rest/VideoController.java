@@ -24,51 +24,43 @@ public class VideoController {
 
     @PostMapping("/{userId}")
     public ResponseEntity<VideoModel> createVideo (@Valid @RequestBody VideoModel video, @PathVariable long userId ) throws Exception{
-
         return ResponseEntity.status(HttpStatus.CREATED).body(videoService.createVideo(video, userId));
     }
 
 
     @GetMapping("/{videoId}")
     public ResponseEntity<VideoModel> getVideo (@PathVariable Long videoId) throws Exception {
-
         return ResponseEntity.status(HttpStatus.OK).body(videoService.getVideo(videoId));
     }
 
 
     @GetMapping
     public ResponseEntity<Iterable<VideoModel>> getVideos () {
-
         return ResponseEntity.status(HttpStatus.OK).body(videoService.getVideos());
     }
 
 
     @DeleteMapping("/{videoId}")
     public ResponseEntity deleteVideo(@PathVariable Long videoId){
-
         videoService.deleteVideo(videoId);
-
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 
     @PutMapping("/{videoId}")
     public ResponseEntity updateVideo(@PathVariable long videoId, @Valid @RequestBody VideoModel video) throws Exception{
-
         return ResponseEntity.status(HttpStatus.OK).body(videoService.updateVideo(video, videoId));
     }
 
 
     @GetMapping("/users{userId}")
     public ResponseEntity<List<VideoModel>> getVideoByUserId (@PathVariable long userId) throws Exception{
-
         return ResponseEntity.status(HttpStatus.OK).body(videoService.getVideosByUserId(userId));
     }
 
 
     @GetMapping("/category{categoryId}")
     public ResponseEntity<List<VideoModel>> getVideoByCategoryId (@PathVariable long categoryId) throws Exception{
-
         return ResponseEntity.status(HttpStatus.OK).body(videoService.getVideosByCategoryId(categoryId));
     }
 }
