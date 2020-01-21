@@ -25,6 +25,8 @@ public class VideoModel implements Serializable {
 
     private String description;
 
+    private long userId;
+
 
     private static ModelMapper modelMapper = new ModelMapper();
 

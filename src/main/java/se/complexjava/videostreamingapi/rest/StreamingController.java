@@ -18,10 +18,12 @@ import java.util.List;
 public class StreamingController {
 
 
-    @GetMapping("/streaming/{name}")
-    public ResponseEntity<ResourceRegion> getVideo(@PathVariable(name = "name") String name, @RequestHeader HttpHeaders headers) throws Exception{
+    @GetMapping("/streaming/{userId}/{videoId}")
+    public ResponseEntity<ResourceRegion> getVideo(@PathVariable(name="userId") String userId,
+                                                   @PathVariable(name="videoId") String videoId,
+                                                   @RequestHeader HttpHeaders headers) throws Exception{
 
-        Path file = Paths.get("./videos/" + name);
+        Path file = Paths.get("./videos/" + userId +"/"+ videoId +"/"+ videoId +".mp4");
         UrlResource video = new UrlResource(file.toUri());
 
         ResourceRegion newResource = resourceRegion(video, headers);
