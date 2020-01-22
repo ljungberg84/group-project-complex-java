@@ -38,10 +38,11 @@ public class User implements Serializable {
     private String email;
 
     @NotEmpty(message = "personal id can't be null or empty")
+    @Column( unique = true )
     private String personalId;
 
-    @NotEmpty(message = "password can't be null or empty")
-    private String password;
+    //@NotEmpty(message = "password can't be null or empty")
+    //private String password;
 
     private String avatarImagePath;
 

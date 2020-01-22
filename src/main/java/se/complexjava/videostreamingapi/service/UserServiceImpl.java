@@ -1,42 +1,28 @@
 package se.complexjava.videostreamingapi.service;
 
-
 import org.springframework.stereotype.Service;
 import se.complexjava.videostreamingapi.entity.User;
 import se.complexjava.videostreamingapi.exceptionhandling.exception.ResourceNotFoundException;
-
 import se.complexjava.videostreamingapi.model.UserModel;
 import se.complexjava.videostreamingapi.repository.UserRepository;
-import se.complexjava.videostreamingapi.security.PasswordEncoderImpl;
-
-
 import java.time.Instant;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private PasswordEncoderImpl hashEncoder = new PasswordEncoderImpl();
-
     private UserRepository repository;
-
 
     public UserServiceImpl(UserRepository repository) {
         this.repository = repository;
     }
 
-
     @Override
-    public UserModel createUser(UserModel user) throws Exception {
-        String strongPassword = hashEncoder.encode(user.getPassword());
-        user.setPassword(strongPassword);
+    public UserModel createUser(UserModel userModel) throws Exception {
+        User user = User.fromModel(userModel);
         user.setJoinDate(Instant.now());
-
-        User userEntity = User.fromModel(user);
-
-        return UserModel.fromEntity(repository.save(userEntity));
+        return UserModel.fromEntity(repository.save(user));
     }
-
 
     @Override
     public UserModel getUser(Long userId) throws Exception {
@@ -53,14 +39,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Iterable<UserModel> getUsers() {
-
         return UserModel.fromEntity(repository.findAll());
     }
 
 
     @Override
     public void deleteUser(Long userId) {
-
         repository.deleteById(userId);
     }
 
@@ -77,21 +61,10 @@ public class UserServiceImpl implements UserService {
         User userToUpdate = optionalUser.get();
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setPersonalId(user.getPersonalId());
         userToUpdate.setEmail(user.getEmail());
-        userToUpdate.setPassword(user.getPassword());
         userToUpdate.setAvatarImagePath(user.getAvatarImagePath());
 
         return UserModel.fromEntity(repository.save(userToUpdate));
     }
-
-
-    @Override
-    public String getPasswordByEmail(String email) throws Exception {
-        Optional<User> user = repository.findByEmail(email);
-        if (!user.isPresent()) {
-            throw new ResourceNotFoundException(String.format("User with email: %s not found", email));
-        }
-        return user.get().getPassword();
-    }
-
 }

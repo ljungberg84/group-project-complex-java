@@ -19,9 +19,13 @@ public class VideoViewController {
   }
 
 
-  @PostMapping
-  public ResponseEntity<VideoViewModel> createVideoView(@Valid @RequestBody VideoViewModel videoViewJsonBody) throws Exception {
-    VideoViewModel videoViewModel = videoViewService.createVideoView(videoViewJsonBody);
+  @PostMapping("/{userId}/{videoId}")
+  public ResponseEntity<VideoViewModel> createVideoView(
+          @PathVariable(name = "userId") Long userId,
+          @PathVariable(name = "videoId") Long videoId,
+          @Valid @RequestBody VideoViewModel videoView) throws Exception {
+
+    VideoViewModel videoViewModel = videoViewService.createVideoView(userId, videoId, videoView);
     return ResponseEntity.status(HttpStatus.CREATED).body(videoViewModel);
   }
 
@@ -34,22 +38,23 @@ public class VideoViewController {
 
 
   @DeleteMapping("/video/{videoId}")
-  public ResponseEntity<String> deleteVideoViewsByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
+  public ResponseEntity deleteVideoViewsByVideoId(@PathVariable("videoId") Long videoId) throws Exception {
     videoViewService.deleteVideoViewByVideoId(videoId);
-    return ResponseEntity.status(HttpStatus.OK).body("deleted");
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
 
   @DeleteMapping("/user/{userId}")
-  public ResponseEntity<String> deleteVideoViewsByUserId(@PathVariable("userId") Long userId) throws Exception {
+  public ResponseEntity deleteVideoViewsByUserId(@PathVariable("userId") Long userId) throws Exception {
     videoViewService.deleteVideoViewByVideoId(userId);
-    return ResponseEntity.status(HttpStatus.OK).body("deleted");
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
 
-  @PostMapping("/{videoViewId}")
-  public ResponseEntity<VideoViewModel> getVideoViewsByVideoId(@Valid @RequestBody VideoViewModel videoViewJsonBody) throws Exception {
-    VideoViewModel videoViewModel = videoViewService.updateVideoView(videoViewJsonBody);
+  @PutMapping("/{videoViewId}")
+  public ResponseEntity<VideoViewModel> getVideoViewsByVideoId(@Valid @RequestBody VideoViewModel videoView,
+                                                               @PathVariable("videoViewId") Long videoViewId) throws Exception {
+    VideoViewModel videoViewModel = videoViewService.updateVideoView(videoView, videoViewId);
     return ResponseEntity.status(HttpStatus.OK).body(videoViewModel);
   }
 
@@ -59,6 +64,8 @@ public class VideoViewController {
     Iterable<VideoViewModel> videoViewModels = videoViewService.findVideoViewsByVideoId(videoId);
     return ResponseEntity.status(HttpStatus.OK).body(videoViewModels);
   }
+
+
   @GetMapping("/user/{userId}")
   public ResponseEntity<Iterable<VideoViewModel>> findVideoViewsByUserId(@PathVariable("userId") Long userId) throws Exception {
     Iterable<VideoViewModel> videoViewModels = videoViewService.findVideoViewsByUserId(userId);
