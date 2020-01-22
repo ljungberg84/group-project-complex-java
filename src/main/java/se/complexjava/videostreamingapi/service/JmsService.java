@@ -31,21 +31,21 @@ public class JmsService {
     @JmsListener(destination = UPLOADER_TO_DATA_QUE)
     public void setVideoUploaded(Map<String, String> message){
         long userId = Long.parseLong(message.get("userId"));
-        String title = message.get("title");
+        long videoId = Long.parseLong(message.get("videoId"));
         try{
             if(message.get("status").equals("1")){
-                Video video = videoRepository.findByUserIdAndTitle(userId, title);
+                Video video = videoRepository.findById(videoId).get();
                 video.setState(VideoState.UPLOADED);
                 videoRepository.save(video);
-                logger.info("videostate for: {}&{} set to UPLOADED", userId, title);
+                logger.info("videostate for: {}&{} set to UPLOADED", userId, videoId);
 
             }else{
-                videoRepository.deleteByUserIdAndTitle(userId, title);
-                logger.info(String.format("setVideoUploaded(), removing video: {}&{} due to unsuccessful upload", userId, title));
+                videoRepository.deleteById(videoId);
+                logger.info(String.format("setVideoUploaded(), removing video: {}&{} due to unsuccessful upload", userId, videoId));
 
             }
         }catch (NullPointerException e){
-            logger.info(String.format("setVideoUploaded(), video state could not be updated because not found: userId: %s, title: %s", userId, title));
+            logger.info(String.format("setVideoUploaded(), video state could not be updated because not found: userId: %s, videoId: %s", userId, videoId));
         }
     }
 
@@ -53,23 +53,21 @@ public class JmsService {
     @JmsListener(destination = ENCODER_TO_DATA_QUE)
     public void setVideoEncoded(Map<String, String>message){
         long userId = Long.parseLong(message.get("userId"));
-        String title = message.get("title");
+        long videoId = Long.parseLong(message.get("videoId"));
         try{
-            Video video = videoRepository.findByUserIdAndTitle(userId, title);
+            Video video = videoRepository.findById(videoId).get();
             video.setState(VideoState.ENCODED);
             videoRepository.save(video);
-            logger.info("videostate for: {}&{} set to ENCODED", userId, title);
+            logger.info("videostate for: {}&{} set to ENCODED", userId, videoId);
         }catch(NullPointerException e){
-            logger.info(String.format("setVideoEncoded(), video state could not be updated because not found: userId: %s, title: %s", userId, title));
+            logger.info(String.format("setVideoEncoded(), video state could not be updated because not found: userId: %s, videoId: %s", userId, videoId));
         }
     }
 
 
     @JmsListener(destination = DELETED_VIDEO_FILE_TOPIC)
     public void removeVideo(Map<String, String>message){
-        long userId = Long.parseLong(message.get("userId"));
-        String title = message.get("title");
-
-        videoRepository.deleteByUserIdAndTitle(userId, title);
+        long videoId = Long.parseLong(message.get("videoId"));
+        videoRepository.deleteById(videoId);
     }
 }
