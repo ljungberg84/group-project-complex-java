@@ -6,9 +6,8 @@ import se.complexjava.videostreamingapi.entity.VideoView;
 
 import java.util.List;
 
-
 @Repository
-public interface VideoViewRepository extends JpaRepository<VideoView, VideoRepository> {
+public interface VideoViewRepository extends JpaRepository<VideoView, Long> {
 
     List<VideoView> findByVideoId(long videoId);
 

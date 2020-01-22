@@ -5,11 +5,11 @@ import se.complexjava.videostreamingapi.model.CommentModel;
 
 public interface CommentService {
 
-  CommentModel createComment(CommentModel commentModel) throws Exception;
+  CommentModel createComment(Long userId, Long videoId, CommentModel commentModel) throws Exception;
   CommentModel getComment(Long commentId) throws Exception;
   Iterable<CommentModel> getComments() throws Exception;
   void deleteComment(Long commentId) throws Exception;
-  CommentModel updateComment(CommentModel commentModel) throws ResourceNotFoundException;
+  CommentModel updateComment(CommentModel commentModel, Long commentId) throws ResourceNotFoundException;
   Iterable<CommentModel> findCommentsByVideoId(Long videoId) throws ResourceNotFoundException;
   Iterable<CommentModel> findCommentsByUserId(Long userId) throws ResourceNotFoundException;
 }
