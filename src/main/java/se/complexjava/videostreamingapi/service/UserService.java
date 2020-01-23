@@ -9,4 +9,5 @@ public interface UserService {
     Iterable<UserModel> getUsers();
     void deleteUser(Long userId);
     UserModel updateUser(UserModel user, long userId) throws Exception;
+    UserModel getUserByEmail(String email) throws Exception;
 }
