@@ -54,4 +54,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(user, userId));
     }
 
+
+    @GetMapping("email/{email}")
+    public ResponseEntity<UserModel> getUserByEmail(@PathVariable String email) throws Exception {
+
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserByEmail(email)
+        );
+    }
+
 }
