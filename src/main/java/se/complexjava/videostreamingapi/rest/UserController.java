@@ -19,9 +19,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-        public ResponseEntity<UserModel> createUser(@Valid @RequestBody UserModel user) throws Exception {
+        public ResponseEntity<Long> createUser(@Valid @RequestBody UserModel user) throws Exception {
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user).getId());
     }
 
 
