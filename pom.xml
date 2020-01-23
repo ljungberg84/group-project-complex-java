@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>se.complex-java</groupId>
-	<artifactId>video-streaming-api</artifactId>
+	<artifactId>video-data</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>video-streaming-api</name>
+	<name>video-data</name>
 	<description>Group project for complex-java course</description>
 
 	<properties>
