@@ -67,4 +67,15 @@ public class UserServiceImpl implements UserService {
 
         return UserModel.fromEntity(repository.save(userToUpdate));
     }
+
+    @Override
+    public UserModel getUserByEmail(String email) throws ResourceNotFoundException {
+        Optional<User> user = repository.findByEmail(email);
+
+        if (!user.isPresent()) {
+            throw new ResourceNotFoundException(String.format("User with id: %s not found", email));
+        }
+
+        return UserModel.fromEntity(user.get());
+    }
 }
