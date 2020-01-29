@@ -25,7 +25,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
 
     @ExceptionHandler(CommunicationsException.class)
-    public void handleCommunicationsException(CommunicationsException e){
+        public void handleCommunicationsException(CommunicationsException e){
 
         logger.info("{}. database could be unavailable(this is normal on startup)", e.getMessage());
 

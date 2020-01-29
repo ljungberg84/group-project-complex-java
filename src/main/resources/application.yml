@@ -2,8 +2,8 @@ spring:
   application:
     name: video-data
 
-#server:
-#  port: 7001
+server:
+  port: 8000
 
 
 eureka:
